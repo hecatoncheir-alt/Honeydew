@@ -4,8 +4,7 @@ import 'package:angular/angular.dart';
 
 @Component(
   selector: 'page-view',
-  template: '''
-    page
-  '''
+  templateUrl: 'page_view.html',
+  styleUrls: ['page_view.css']
 )
 class PageViewComponent {}
