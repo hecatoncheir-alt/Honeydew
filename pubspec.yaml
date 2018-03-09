@@ -5,6 +5,7 @@ environment:
 
 dependencies:
   angular: ^5.0.0-alpha+7
+  angular_router: ^2.0.0-alpha+7
   yaml: ^2.1.13
 
 dev_dependencies:
