@@ -1,0 +1,5 @@
+production:
+  socket:
+    protocol: "ws"
+    ip: "localhost"
+    port: 8081
