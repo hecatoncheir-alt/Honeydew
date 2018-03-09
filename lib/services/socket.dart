@@ -23,41 +23,6 @@ class SocketService {
 
   Stream<Map> data;
 
-  Future<Null> _setUpConfiguration() async {
-    String protocol = window.location.protocol;
-    String host =
-        window.location.host.replaceAll(":${window.location.port}", '');
-    int port = int.parse(window.location.port);
-
-    try {
-      String configFile = await HttpRequest
-          .getString('$protocol//$host:$port/configuration.yaml');
-
-      configuraion = loadYaml(configFile);
-    } catch (error) {
-      print(error);
-    }
-  }
-
-  /// Получая событие от сервера нужно JSON строку разобрать в
-  /// Map структуру.
-  /// В stream приходит MessageEvent объект.
-  /// Метод может разобрать как строку так и событие которое
-  /// содержит в себе строку. Это делает метод более универсальным,
-  /// и позволяет проще реализовать Mock сервиса.
-  Future<Map> _decodeSocketData(event) async {
-    Map data;
-    if (event is String) data = JSON.decode(event);
-    if (event is MessageEvent) data = JSON.decode(event.data);
-
-    return data;
-  }
-
-  /// После того как данные о событии с сервера будут представлены
-  /// в виде структуры Map, их можно отправлять в поток событий: data,
-  /// на который подписывaются остальные сервисы и компоненты.
-  void _finalizeData(Map socketData) => dataControl.add(socketData);
-
   /// Конструктор сервиса
   SocketService() {
     data = dataControl.stream.asBroadcastStream() as Stream<Map>;
@@ -134,6 +99,15 @@ class SocketService {
     }
   }
 
+  /// Метод закрытия соеднинения с socket сервером
+  Future<Null> connectionClose() async {
+    try {
+      socketConnection.close();
+    } catch (error) {
+      print(error);
+    }
+  }
+
   /// Через каждые 3 секунды (по умолчанию) клиент предпринимает
   /// попытки восстановить соединение.
   /// Подробнее: при подключении, если сервер будет не доступен, socketConnection
@@ -202,10 +176,36 @@ class SocketService {
     waitForSocketConnection(socketConnection, encodedData, 5);
   }
 
-  /// Метод закрытия соеднинения с socket сервером
-  Future<Null> connectionClose() async {
+  /// Получая событие от сервера нужно JSON строку разобрать в
+  /// Map структуру.
+  /// В stream приходит MessageEvent объект.
+  /// Метод может разобрать как строку так и событие которое
+  /// содержит в себе строку. Это делает метод более универсальным,
+  /// и позволяет проще реализовать Mock сервиса.
+  Future<Map> _decodeSocketData(event) async {
+    Map data;
+    if (event is String) data = JSON.decode(event);
+    if (event is MessageEvent) data = JSON.decode(event.data);
+
+    return data;
+  }
+
+  /// После того как данные о событии с сервера будут представлены
+  /// в виде структуры Map, их можно отправлять в поток событий: data,
+  /// на который подписывaются остальные сервисы и компоненты.
+  void _finalizeData(Map socketData) => dataControl.add(socketData);
+
+  Future<Null> _setUpConfiguration() async {
+    String protocol = window.location.protocol;
+    String host =
+        window.location.host.replaceAll(":${window.location.port}", '');
+    int port = int.parse(window.location.port);
+
     try {
-      socketConnection.close();
+      String configFile = await HttpRequest
+          .getString('$protocol//$host:$port/configuration.yaml');
+
+      configuraion = loadYaml(configFile);
     } catch (error) {
       print(error);
     }

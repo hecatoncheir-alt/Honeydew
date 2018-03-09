@@ -2,7 +2,6 @@ library page_view_component;
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-
 import 'package:honeydew/services.dart' as services;
 
 import '../search/search.template.dart' as templates;
@@ -14,13 +13,14 @@ import '../search/search.template.dart' as templates;
     directives: [routerDirectives],
     providers: const [services.SocketService, routerProviders])
 class PageViewComponent {
-  services.SocketService socketService;
-  final Router router;
-
   static final mainRoute = new RoutePath(
     path: "/",
     useAsDefault: true,
   );
+
+  services.SocketService socketService;
+
+  final Router router;
 
   final List<RouteDefinition> routes = [
     new RouteDefinition(
@@ -30,7 +30,6 @@ class PageViewComponent {
   ];
 
   PageViewComponent(this.socketService, this.router) {
-    router.onRouteActivated.listen((RouterState data) {
-    });
+    router.onRouteActivated.listen((RouterState data) {});
   }
 }
