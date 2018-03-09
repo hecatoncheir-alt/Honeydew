@@ -4,7 +4,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'package:honeydew/services.dart' as services;
-import 'package:honeydew/components.dart' as components;
+
+import '../search/search.template.dart' as templates;
 
 @Component(
     selector: 'page-view',
@@ -24,7 +25,7 @@ class PageViewComponent {
   final List<RouteDefinition> routes = [
     new RouteDefinition(
       routePath: mainRoute,
-      component: components.SearchComponentNgFactory,
+      component: templates.SearchComponentNgFactory,
     ),
   ];
 
