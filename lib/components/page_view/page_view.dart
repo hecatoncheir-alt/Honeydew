@@ -9,6 +9,7 @@ import '../search/search.template.dart' as templates;
 @Component(
     selector: 'page-view',
     templateUrl: 'page_view.html',
+    styleUrls: const ['page_view.css'],
     directives: const [routerDirectives],
     providers: const [services.SocketService, routerProviders])
 class PageViewComponent {
