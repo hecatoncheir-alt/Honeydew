@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:yaml/yaml.dart';
 
 @Injectable()
 class SocketService {
