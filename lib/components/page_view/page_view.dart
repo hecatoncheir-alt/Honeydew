@@ -2,15 +2,14 @@ library page_view_component;
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:honeydew/services.dart' as services;
 
+import 'package:honeydew/services.dart' as services;
 import '../search/search.template.dart' as templates;
 
 @Component(
     selector: 'page-view',
     templateUrl: 'page_view.html',
-    styleUrls: ['page_view.css'],
-    directives: [routerDirectives],
+    directives: const [routerDirectives],
     providers: const [services.SocketService, routerProviders])
 class PageViewComponent {
   static final mainRoute = new RoutePath(
