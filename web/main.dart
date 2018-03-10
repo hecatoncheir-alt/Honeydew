@@ -9,6 +9,7 @@ import 'main.template.dart' as template;
 
 @GenerateInjector(const [routerProviders])
 final InjectorFactory mainInjector = template.mainInjector$Injector;
+
 void main() {
   bootstrapFactory(
     page_view.PageViewComponentNgFactory,
