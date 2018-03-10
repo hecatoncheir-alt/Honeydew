@@ -11,7 +11,6 @@ import 'package:yaml/yaml.dart';
 class SocketService {
   WebSocket
       socketConnection; // Подключение куда отправляются события и откуда приходят
-  Map configuraion;
 
   List eventPool = new List();
 
@@ -23,36 +22,23 @@ class SocketService {
 
   Stream<Map> data;
 
+  String protocol, host;
+  int port;
+
   /// Конструктор сервиса
   SocketService() {
     data = dataControl.stream.asBroadcastStream() as Stream<Map>;
-
-    if (configuraion == null) {
-      /// Получения данных о socket сервере, после чего
-      /// происходит подключение к серверу.
-      _setUpConfiguration().then((_) {
-        connect();
-      });
-    } else {
-      connect();
-    }
   }
 
   /// Подключение к серверу
-  void connect({String location, int port}) {
+  void connect({String protocol: "ws", String host, int port}) {
+    this
+      ..protocol = protocol
+      ..host = host
+      ..port = port;
+
     try {
-      String protocol = configuraion['production']['socket']['protocol'];
-      String ip;
-
-      if (configuraion['production']['socket']['ip'] != null) {
-        ip = configuraion['production']['socket']['ip'];
-      } else {
-        ip = window.location.hostname;
-      }
-
-      String port = configuraion['production']['socket']['port'].toString();
-
-      String iri = "$protocol://$ip:$port/";
+      String iri = "$protocol://$host:$port/";
 
       /// Подключение к socket серверу
       socketConnection = new WebSocket(iri);
@@ -94,8 +80,8 @@ class SocketService {
         /// установления связи с сервером повторно.
         reconnect(durationInSeconds: 3);
       });
-    } catch (error) {
-      print(error);
+    } catch (err) {
+      print(err);
     }
   }
 
@@ -113,7 +99,10 @@ class SocketService {
   /// Подробнее: при подключении, если сервер будет не доступен, socketConnection
   /// обработает событие onClose где вновь будет вызван метод reconnect.
   void reconnect({int durationInSeconds: 3}) {
-    new Timer(new Duration(seconds: durationInSeconds), () => connect());
+    new Timer(
+        new Duration(seconds: durationInSeconds),
+        () =>
+            connect(protocol: this.protocol, host: this.host, port: this.port));
     reconnectionInProgress = true;
   }
 
@@ -194,20 +183,4 @@ class SocketService {
   /// в виде структуры Map, их можно отправлять в поток событий: data,
   /// на который подписывaются остальные сервисы и компоненты.
   void _finalizeData(Map socketData) => dataControl.add(socketData);
-
-  Future<Null> _setUpConfiguration() async {
-    String protocol = window.location.protocol;
-    String host =
-        window.location.host.replaceAll(":${window.location.port}", '');
-    int port = int.parse(window.location.port);
-
-    try {
-      String configFile = await HttpRequest
-          .getString('$protocol//$host:$port/configuration.yaml');
-
-      configuraion = loadYaml(configFile);
-    } catch (error) {
-      print(error);
-    }
-  }
 }
