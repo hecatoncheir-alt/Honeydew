@@ -1,2 +1,12 @@
 *.css
 *.css.map
+
+.dart_tool/
+.packages
+.pub/
+build/
+pubspec.lock
+
+doc/api/
+
+.vscode/
