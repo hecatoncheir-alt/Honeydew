@@ -20,37 +20,36 @@ import '../search/search.template.dart' as templates;
     providers: const [
       services.SocketService,
       services.ConfigurationService,
-      routerProviders
+      routerProvidersHash,
     ])
 class PageViewComponent extends OnInit {
-  static final mainRoute = new RoutePath(
-    path: "/",
-    useAsDefault: true,
-  );
-
   services.SocketService socketService;
   services.ConfigurationService configuration;
 
   final Router router;
 
+  static final searchRoute = new RoutePath(path: "search", useAsDefault: true);
+
   final List<RouteDefinition> routes = [
+    new RouteDefinition.redirect(path: '', redirectTo: "search"),
     new RouteDefinition(
-      routePath: mainRoute,
-      component: templates.SearchComponentNgFactory,
-    ),
+        path: 'search',
+        routePath: searchRoute,
+        component: templates.SearchComponentNgFactory,
+        useAsDefault: true),
   ];
 
   PageViewComponent(this.socketService, this.configuration, this.router);
 
   @override
   void ngOnInit() {
-    configuration
-        .getConfiguration(window.location)
-        .then((services.Configuration config) {
-      socketService.connect(
-          protocol: config.socket.protocol,
-          host: config.socket.host,
-          port: config.socket.port);
-    });
+    // configuration
+    //     .getConfiguration(window.location)
+    //     .then((services.Configuration config) {
+    //   socketService.connect(
+    //       protocol: config.socket.protocol,
+    //       host: config.socket.host,
+    //       port: config.socket.port);
+    // });
   }
 }
