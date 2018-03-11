@@ -1,8 +1,9 @@
-body {
-  margin: 0;
-  padding: 0;
+@import 'preset';
 
+body {
   background: #f7f9fc;
 
   color: gray;
+  display: flex;
+  flex-direction: column;
 }
