@@ -1,6 +1,10 @@
 *.css
 *.css.map
 
+*.js
+*.js.deps
+*.js.map
+
 .dart_tool/
 .packages
 .pub/
