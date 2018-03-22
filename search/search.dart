@@ -2,5 +2,4 @@
 library search;
 
 void main() {
-  print("search");
 }
