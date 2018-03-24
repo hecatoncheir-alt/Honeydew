@@ -8,7 +8,7 @@
 .logotype {
   text-align: center;
 
-  font-family: "IBM Plex Mono Bold";
+  font-family: "IBM Plex Mono SemiBold";
   font-style: normal;
   font-weight: 700;
   font-size: 2.2em;
@@ -37,8 +37,9 @@
 .search-form {
   border: 1px solid #152849;
   display: flex;
-  height: calc(100vh / 5);
+  min-height: calc(100vh / 5);
 
+  margin: 6%;
   padding: 6%;
   flex-direction: column;
   justify-content: space-between;
