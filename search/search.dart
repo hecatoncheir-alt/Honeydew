@@ -2,4 +2,6 @@
 library search;
 
 void main() {
+  var daa = "da";
+  print(daa);
 }

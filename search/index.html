@@ -3,7 +3,7 @@
 <head>
     <title>Honeydew</title>
 
-    <link href="style.css"
+    <link href="stylesheets/style.css"
           rel="stylesheet">
 </head>
 <body>
@@ -14,12 +14,24 @@
             <div class="counter"></div>
 
             <div class="search-form">
-                <header class="form-input__header">
-                    Название продукта, категории, компании...
-                </header>
-                <div class="form-input--search">
+                <div class="form-input">
+                    <label for="search-field"
+                           class="input__label">
+                        Название продукта, категории, компании...
+                    </label>
 
-                    <input type="text">
+                    <div class="input-container">
+                        <div class="icon search__icon"></div>
+
+                        <input type="text"
+                               autofocus
+                               id="search-field"
+                               class="search__input">
+                    </div>
+
+                    <div class="button button--submit">
+                        Найти
+                    </div>
                 </div>
 
                 <span class="logotype"><span class="mark--info">Honey</span>dew</span>
