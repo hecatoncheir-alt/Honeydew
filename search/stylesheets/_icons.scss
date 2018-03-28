@@ -1,0 +1,14 @@
+$icons-prefix: '../images/icons' !default;
+
+.icon {
+  background-color: #152849;
+}
+
+.search__icon {
+  -webkit-mask: url("#{$icons-prefix}/magnifying_glass.svg");
+
+  mask: url("#{$icons-prefix}magnifying_glass.svg");
+
+  width: 16px;
+  height: 16px;
+}

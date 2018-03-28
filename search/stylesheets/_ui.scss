@@ -1,0 +1,43 @@
+.button {
+  cursor: pointer;
+  border: 1px solid #152849;
+  display: inline-block;
+  padding: 3% 5%;
+
+  font-family: 'IBM Plex Mono';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.3em;
+  color: #54b30f;
+
+  &:hover {
+    color: #f2f8e2;
+    background-color: #182641;
+    border-color: #182641;
+  }
+}
+
+.counter {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 2fr 1fr;
+
+  padding: 6%;
+
+  .counter__label {
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #152849;
+  }
+
+  .count {
+    font-size: 3em;
+    color: #54b30f;
+    text-align: right;
+    justify-self: center;
+  }
+}
