@@ -1,7 +1,7 @@
 .button {
   cursor: pointer;
   border: 1px solid #152849;
-  display: inline-block;
+  display: inline;
   padding: 3% 5%;
 
   font-family: 'IBM Plex Mono';
@@ -15,6 +15,12 @@
     background-color: #182641;
     border-color: #182641;
   }
+}
+
+.button--submit {
+  align-self: flex-end;
+  margin-bottom: 20%;
+  margin-top: 3%;
 }
 
 .counter {

@@ -131,11 +131,6 @@
 //    margin-right: 10px;
 //  }
 //
-//  .button--submit {
-//    align-self: flex-end;
-//    margin-bottom: 20%;
-//    margin-top: 3%;
-//  }
 //}
 
 main {
@@ -146,8 +141,7 @@ main {
 
 .main-search {
   display: grid;
-  grid-template-columns: 2fr 4fr;
-
+  grid-template-columns: 2fr 4fr 3fr;
 }
 
 .search-area {

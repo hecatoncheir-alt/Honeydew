@@ -1,3 +1,44 @@
+.input {
+
+  .input__label {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1em;
+  }
+
+  .input-container {
+    border-bottom: 1px solid #152849;
+    display: flex;
+    align-items: center;
+    margin: 4% 0;
+    padding: 3% 0;
+
+    &:hover {
+      border-bottom-color: #54b30f;
+
+      .icon {
+        background-color: #54b30f;
+      }
+    }
+
+    input {
+      border: none;
+      outline: none;
+      width: calc(100% - 10px);
+      color: #54b30f;
+      font-family: 'IBM Plex Mono';
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+
+    .icon {
+      margin-right: 10px;
+    }
+  }
+}
+
 .search__form {
   border: 1px solid #152849;
   display: flex;
@@ -5,6 +46,11 @@
 
   padding: 6%;
   justify-content: space-between;
+  min-height: 260px;
+
+  footer {
+    text-align: center;
+  }
 
   &:hover {
     border-color: #54b30f;

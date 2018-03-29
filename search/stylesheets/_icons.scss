@@ -5,7 +5,7 @@ $icons-prefix: '../images/icons' !default;
 }
 
 .search__icon {
-  -webkit-mask: url("#{$icons-prefix}/magnifying_glass.svg");
+  -webkit-mask: url("#{$icons-prefix}/magnifying_glass.svg") no-repeat;
 
   mask: url("#{$icons-prefix}magnifying_glass.svg");
 
