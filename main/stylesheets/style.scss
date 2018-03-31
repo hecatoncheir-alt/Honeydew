@@ -8,18 +8,16 @@
 main {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+  //height: 100vh;
+  //width: 100vw;
 }
 
 .template-area {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: calc(100vh/3) calc(100vh/6) calc(100vh/3);
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas:
-    ". . ."
     ". search-form ."
-    ". . .";
+    ". search-result .";
 }
 
 .search-form {
@@ -38,7 +36,12 @@ main {
     font-family: 'IBM Plex Mono';
     font-style: normal;
     font-weight: 400;
-    font-size: 1em;
+    font-size: 0.7em;
   }
+}
+
+.search-result {
+  grid-area: search-result;
+  border: 1px solid #54b30f;
 }
 
