@@ -1,0 +1,44 @@
+@import 'preset';
+@import 'fonts/IBM-Plex/ibm-plex';
+@import "form";
+@import "typography";
+@import "icons";
+@import "ui";
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.template-area {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: calc(100vh/3) calc(100vh/6) calc(100vh/3);
+  grid-template-areas:
+    ". . ."
+    ". search-form ."
+    ". . .";
+}
+
+.search-form {
+  align-self: center;
+  grid-area: search-form;
+
+  .form__details {
+    padding: 6% 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .last-update-time {
+    display: inline-block;
+    margin-bottom: 13px;
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+  }
+}
+
