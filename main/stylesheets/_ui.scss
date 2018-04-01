@@ -24,25 +24,26 @@
 .counter {
   display: grid;
   align-items: center;
-  grid-template-columns: 2fr auto;
-
-  &:last-child {
-    padding-left: 22%;
-  }
+  grid-template-columns: 1fr auto;
 
   .counter__label {
     text-transform: uppercase;
     font-family: 'IBM Plex Mono';
     font-style: italic;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 0.8em;
     color: #152849;
   }
 
   .count {
-    padding-left: 26%;
-    font-size: 3em;
+    padding-left: 16%;
+    margin-right: 26%;
+    font-size: 2em;
     color: #54b30f;
     text-align: right;
   }
+}
+
+.details-block {
+  margin: 16px 0;
 }

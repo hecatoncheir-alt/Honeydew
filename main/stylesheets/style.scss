@@ -8,40 +8,46 @@
 main {
   display: flex;
   flex-direction: column;
-  //height: 100vh;
-  //width: 100vw;
+  height: 100vh;
+  width: 100vw;
 }
 
 .template-area {
+  height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  grid-template-columns: 0.1fr 1fr 0.2fr 2fr 0.4fr 4fr;
   grid-template-areas:
-    ". search-form ."
-    ". search-result .";
+          ". information . search-form . search-result";
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  grid-area: information;
+
+  .information__header {
+    border-bottom: 1px solid #152849;
+    padding-bottom: 8px;
+    width: 100%;
+  }
 }
 
 .search-form {
-  align-self: center;
   grid-area: search-form;
+  margin-top: -12px;
 
-  .form__details {
-    padding: 6% 0;
+  .search-form__footer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-  }
-
-  .last-update-time {
-    display: inline-block;
-    margin-bottom: 13px;
-    font-family: 'IBM Plex Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 0.7em;
   }
 }
 
 .search-result {
+  display: flex;
+  align-items: center;
   grid-area: search-result;
-  border: 1px solid #54b30f;
+  //border: 1px solid #54b30f;
 }
 

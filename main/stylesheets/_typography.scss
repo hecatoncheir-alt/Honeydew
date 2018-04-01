@@ -2,6 +2,15 @@ body {
   color: #182641;
 }
 
+a {
+  text-decoration: none;
+  color: #182641;
+
+  &:hover {
+    color: #54b30f;
+  }
+}
+
 .mark--info {
   color: #54b30f;
 }
