@@ -74,6 +74,12 @@
       border-bottom: none 0;
     }
 
+    .table__row--header {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
     .row__column {
       display: flex;
       justify-content: center;
@@ -83,10 +89,11 @@
         justify-content: left;
       }
 
-      .row__cell {
-        font-family: 'IBM Plex Mono';
+      .row__cell--header {
+        font-family: 'IBM Plex Mono' !important;
         font-style: normal;
         font-weight: 700;
+        color: #55aa26;
         text-transform: uppercase;
       }
     }
@@ -119,6 +126,12 @@
 
       &:first-child {
         text-align: left;
+      }
+
+      .row__cell {
+        font-family: 'IBM Plex Sans';
+        font-style: normal;
+        font-weight: 400;
       }
     }
   }

@@ -36,6 +36,9 @@ main {
   grid-area: search-form;
   margin-top: -8px;
 
+  border: 1px solid #152849;
+  padding: 6%;
+
   .search-form__footer {
     display: flex;
     align-items: center;
@@ -47,6 +50,9 @@ main {
   display: flex;
   align-items: center;
   grid-area: search-result;
+
+  border: 1px solid #54b30f;
+  margin-right: 3%;
 
   .table {
     min-width: 100%;
