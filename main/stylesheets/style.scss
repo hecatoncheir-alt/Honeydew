@@ -48,6 +48,10 @@ main {
   align-items: center;
   grid-area: search-result;
 
+  .table {
+    min-width: 100%;
+  }
+
   .table__body {
     overflow-y: scroll;
     height: 80vh;
