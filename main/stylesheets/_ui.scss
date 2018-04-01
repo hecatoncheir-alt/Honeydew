@@ -103,14 +103,13 @@
 
     transition: all 100ms ease-in-out;
 
-    &:nth-child(even){
+    &:nth-child(even) {
       background-color: #f4f7eb;
     }
 
     &:hover {
-      background-color: #55aa26;
+      background-color: #deecb4;
       border-bottom-color: #ffffff;
-      color: #f4f7eb;
     }
 
     .row__column {
