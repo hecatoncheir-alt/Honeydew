@@ -14,6 +14,8 @@
     margin: 12px 0 0 0;
     padding: 6px 0;
 
+    transition: all 100ms ease-in-out;
+
     &:hover {
       border-bottom-color: #54b30f;
 
@@ -39,8 +41,3 @@
   }
 }
 
-.search__form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}

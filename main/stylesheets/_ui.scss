@@ -1,3 +1,17 @@
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f1f7e0;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 .button {
   cursor: pointer;
   border: 1px solid #152849;
@@ -9,6 +23,8 @@
   font-weight: 500;
   font-size: 1.3em;
   color: #54b30f;
+
+  transition: all 100ms ease-in-out;
 
   &:hover {
     color: #f2f8e2;
@@ -46,4 +62,66 @@
 
 .details-block {
   margin: 16px 0;
+}
+
+.table {
+  padding: 3%;
+
+  .table__header {
+    margin-bottom: 20px;
+
+    .table__row {
+      border-bottom: none 0;
+    }
+
+    .row__column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:first-child {
+        justify-content: left;
+      }
+
+      .row__cell {
+        font-family: 'IBM Plex Mono';
+        font-style: normal;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .table__row {
+    display: grid;
+    grid-template-columns: 3fr repeat(3, 1fr);
+    grid-column-gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #d1e1c9;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 100ms ease-in-out;
+
+    &:nth-child(even){
+      background-color: #f4f7eb;
+    }
+
+    &:hover {
+      background-color: #55aa26;
+      border-bottom-color: #ffffff;
+      color: #f4f7eb;
+    }
+
+    .row__column {
+      text-align: center;
+
+      padding: 3px;
+
+      &:first-child {
+        text-align: left;
+      }
+    }
+  }
+
 }

@@ -17,8 +17,7 @@ main {
   display: grid;
   align-items: center;
   grid-template-columns: 0.1fr 1fr 0.2fr 2fr 0.4fr 4fr;
-  grid-template-areas:
-          ". information . search-form . search-result";
+  grid-template-areas: ". information . search-form . search-result";
 }
 
 .information {
@@ -48,6 +47,9 @@ main {
   display: flex;
   align-items: center;
   grid-area: search-result;
-  //border: 1px solid #54b30f;
-}
 
+  .table__body {
+    overflow-y: scroll;
+    height: 80vh;
+  }
+}
