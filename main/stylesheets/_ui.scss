@@ -66,6 +66,7 @@
 
 .table {
   padding: 3%;
+  padding-bottom: 0;
 
   .table__header {
     margin-bottom: 20px;
@@ -135,5 +136,26 @@
       }
     }
   }
+}
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 3% 0;
+
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+
+  .page--active {
+    font-size: 1.3em;
+    color: #55aa26;
+  }
+
+  .page {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
