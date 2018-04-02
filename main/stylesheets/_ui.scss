@@ -1,7 +1,9 @@
 ::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
   background: transparent;
+
+  width: 12px;
+
+  height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -13,21 +15,26 @@
 }
 
 .button {
-  cursor: pointer;
-  border: 1px solid #152849;
-  display: inline;
   padding: 12px 22px;
 
+  border: 1px solid #152849;
+
   font-family: 'IBM Plex Mono';
+  font-size: 1.3em;
   font-style: italic;
   font-weight: 500;
-  font-size: 1.3em;
-  color: #54b30f;
 
   transition: all 100ms ease-in-out;
 
+  color: #54b30f;
+
+  display: inline;
+
+  cursor: pointer;
+
   &:hover {
     color: #f2f8e2;
+
     background-color: #182641;
     border-color: #182641;
   }
@@ -40,23 +47,27 @@
 .counter {
   display: grid;
   align-items: center;
+
   grid-template-columns: 1fr auto;
 
   .counter__label {
-    text-transform: uppercase;
     font-family: 'IBM Plex Mono';
+    font-size: 0.8em;
     font-style: italic;
     font-weight: 500;
-    font-size: 0.8em;
+
     color: #152849;
+    text-transform: uppercase;
   }
 
   .count {
-    padding-left: 16%;
     margin-right: 26%;
+    padding-left: 16%;
+
     font-size: 2em;
-    color: #54b30f;
+
     text-align: right;
+    color: #54b30f;
   }
 }
 
@@ -83,8 +94,8 @@
 
     .row__column {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
 
       &:first-child {
         justify-content: left;
@@ -94,6 +105,7 @@
         font-family: 'IBM Plex Mono' !important;
         font-style: normal;
         font-weight: 700;
+
         color: #55aa26;
         text-transform: uppercase;
       }
@@ -101,15 +113,18 @@
   }
 
   .table__row {
-    display: grid;
-    grid-template-columns: 3fr repeat(3, 1fr);
-    grid-column-gap: 10px;
     padding: 10px 0;
+
     border-bottom: 1px solid #d1e1c9;
-    justify-content: center;
-    align-items: center;
 
     transition: all 100ms ease-in-out;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    grid-column-gap: 10px;
+    grid-template-columns: 3fr repeat(3, 1fr);
 
     &:nth-child(even) {
       background-color: #f4f7eb;
@@ -117,13 +132,13 @@
 
     &:hover {
       background-color: #deecb4;
-      border-bottom-color: #ffffff;
+      border-bottom-color: #fff;
     }
 
     .row__column {
-      text-align: center;
-
       padding: 3px;
+
+      text-align: center;
 
       &:first-child {
         text-align: left;
@@ -139,23 +154,25 @@
 }
 
 .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
   padding: 3% 0;
 
   font-family: 'IBM Plex Mono';
   font-style: normal;
   font-weight: 500;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   .page--active {
     font-size: 1.3em;
+
     color: #55aa26;
   }
 
   .page {
-    flex-direction: row;
     justify-content: center;
+
+    flex-direction: row;
   }
 }
