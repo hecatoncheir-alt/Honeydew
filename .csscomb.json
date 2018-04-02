@@ -36,10 +36,22 @@
     ],
     [
       "margin",
-      "padding"
+      "margin-top",
+      "margin-right",
+      "margin-bottom",
+      "margin-left",
+      "padding",
+      "padding-top",
+      "padding-right",
+      "padding-bottom",
+      "padding-left"
     ],
     [
       "border",
+      "border-top",
+      "border-right",
+      "border-bottom",
+      "border-left",
       "background"
     ],
     [
@@ -51,6 +63,26 @@
       "height",
       "min-height",
       "max-height"
+    ],
+    [
+      "font-family",
+      "font-size",
+      "font-style",
+      "font-weight"
+    ],
+    [
+      "transition"
+    ],
+    [
+      "text-align",
+      "color",
+      "text-transform",
+      "text-decoration"
+    ],
+    [
+      "display",
+      "align-items",
+      "justify-content"
     ]
   ]
 }
