@@ -1,16 +1,16 @@
 name: honeydew
 version: 0.0.1
 environment:
-  sdk: '>=2.0.0-dev.3.0 <2.0.0'
+  sdk: '>=2.0.0-dev.44.0 <2.0.0'
 
 dependencies:
-  angular: ^5.0.0-alpha+7
-  angular_components: ^0.9.0-alpha+7
-  angular_router: ^2.0.0-alpha+7
+  angular: ^5.0.0-alpha+9
+  angular_components: ^0.9.0-alpha+9
+  angular_router: ^2.0.0-alpha+9
   yaml: ^2.1.13
 
 dev_dependencies:
-  angular_test: ^2.0.0-alpha+5
-  build_runner: ^0.7.13+1
-  build_web_compilers: ^0.3.3
-  sass_builder: ^1.1.4
+  angular_test: ^2.0.0-alpha+7
+  build_runner: ^0.8.1
+  build_web_compilers: ^0.3.5
+  sass_builder: ^1.1.5

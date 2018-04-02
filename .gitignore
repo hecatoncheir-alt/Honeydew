@@ -13,3 +13,6 @@ pubspec.lock
 doc/api/
 
 .vscode/
+/.idea/
+/.dart_tool/
+.idea/

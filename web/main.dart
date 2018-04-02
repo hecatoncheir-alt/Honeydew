@@ -1,8 +1,11 @@
 library honeydew;
 
-import 'package:angular/experimental.dart';
-import 'package:honeydew/components/page_view/page_view.template.dart' as page_view;
+import 'package:angular/angular.dart';
+
+import 'package:honeydew/components.dart' show PageViewComponent;
+import 'package:honeydew/components/page_view/page_view.template.dart'
+    as page_view;
 
 void main() {
-  bootstrapFactory(page_view.PageViewComponentNgFactory);
+  bootstrapStatic(PageViewComponent, [], page_view.initReflector);
 }
