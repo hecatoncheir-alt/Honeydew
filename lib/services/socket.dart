@@ -154,7 +154,7 @@ class SocketService {
     /// Событие необходимо добавить в общий пул событий.
     /// Это позволит в случае разъединения отправить событие на сервер
     /// повторно при подключении.
-    String encodedData = JSON.encode(data);
+    String encodedData = json.encode(data);
     eventPool.add(encodedData);
 
     /// Перед отправкой сообщения нужно убедиться в том, что
@@ -172,8 +172,8 @@ class SocketService {
   /// и позволяет проще реализовать Mock сервиса.
   Future<Map> _decodeSocketData(event) async {
     Map data;
-    if (event is String) data = JSON.decode(event);
-    if (event is MessageEvent) data = JSON.decode(event.data);
+    if (event is String) data = json.decode(event);
+    if (event is MessageEvent) data = json.decode(event.data);
 
     return data;
   }
