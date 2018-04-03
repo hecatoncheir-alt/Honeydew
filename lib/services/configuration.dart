@@ -15,6 +15,7 @@ class _SocketServerConfig {
 
 class Configuration {
   _SocketServerConfig socket;
+
   Configuration.fromMap(Map conf) {
     socket = new _SocketServerConfig(conf['socket']['protocol'],
         conf['socket']['ip'], conf['socket']['port']);
@@ -28,11 +29,19 @@ class ConfigurationService {
   Future<Configuration> loadConfiguration(Location location) async {
     String protocol = location.protocol;
     String host = location.host.replaceAll(":${window.location.port}", '');
-    int port = int.parse(location.port);
+
+    int port;
+    if (location.port.isNotEmpty) port = int.parse(location.port);
+
+    String iriOfConfig;
+    if (port != null) {
+      iriOfConfig = '$protocol//$host:$port/configuration.yaml';
+    } else {
+      iriOfConfig = '$protocol//$host/configuration.yaml';
+    }
 
     try {
-      String configFile = await HttpRequest
-          .getString('$protocol//$host:$port/configuration.yaml');
+      String configFile = await HttpRequest.getString(iriOfConfig);
 
       Map conf = loadYaml(configFile);
 
