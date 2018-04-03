@@ -9,30 +9,19 @@ import '../search/search.template.dart' as templates;
 @Component(
     selector: 'page-view',
     templateUrl: 'page_view.html',
-    styleUrls: const [
-      'page_view.css'
-    ],
-    directives: const [
-      routerDirectives
-    ],
-    providers: const [
-      services.SocketService,
-      services.ConfigurationService,
-      routerProvidersHash,
-    ])
+    styleUrls: const ['page_view.css'],
+    directives: const [routerDirectives],
+    providers: const [services.SocketService, services.ConfigurationService])
 class PageViewComponent extends OnInit {
   services.SocketService socketService;
   services.ConfigurationService configuration;
 
   final Router router;
 
-  static final searchRoute = new RoutePath(path: "search", useAsDefault: true);
-
   final List<RouteDefinition> routes = [
-    new RouteDefinition.redirect(path: '', redirectTo: "search"),
+    new RouteDefinition.redirect(path: '/', redirectTo: "/search"),
     new RouteDefinition(
-        path: 'search',
-        routePath: searchRoute,
+        path: '/search',
         component: templates.SearchComponentNgFactory,
         useAsDefault: true),
   ];

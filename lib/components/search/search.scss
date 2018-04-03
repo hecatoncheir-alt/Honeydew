@@ -1,22 +1,24 @@
-.input {
-  padding: 2px 4px;
+.template-area {
+  height: 100vh;
 
-  border: 0 none;
+  display: grid;
+  align-items: center;
 
-  outline: none;
+  grid-template-areas: ". information . search-form . search-result";
+  grid-template-columns: 0.1fr 1fr 0.2fr 2fr 0.4fr 4fr;
 }
 
-.input--whith-rounded-borders {
-  border-radius: 20px;
-}
+.information {
+  display: flex;
 
-.gradient--green {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#43cdc0+0,009ec3+100 */
-  background: #43cdc0; /* Old browsers */
-  background:    -moz-linear-gradient(-45deg, #43cdc0 0%, #009ec3 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #43cdc0 0%,#009ec3 100%); /* Chrome10-25,Safari5.1-6 */
-  background:         linear-gradient(135deg, #43cdc0 0%,#009ec3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  flex-direction: column;
+  grid-area: information;
 
-  color: #fff;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43cdc0', endColorstr='#009ec3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  .information__header {
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid #152849;
+
+    width: 100%;
+  }
 }
