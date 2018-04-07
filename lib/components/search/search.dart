@@ -4,29 +4,33 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-import 'package:angular_components/angular_components.dart';
 
 import 'package:honeydew/services.dart' show SocketService;
+
+class SearchParams {
+  String text;
+}
 
 @Component(
     selector: 'search',
     templateUrl: 'search.html',
     styleUrls: ["search.css"],
-    directives: const [MaterialAutoSuggestInputComponent],
-    providers: const [SocketService, materialProviders])
+    providers: const [SocketService])
 class SearchComponent implements OnActivate {
-  List<String> suggestions = new List<String>();
   SocketService socket;
 
-  int countOfResults = 312;
+  int countOfResults;
+  String searchValue;
+  SearchParams searchParams;
 
-  SearchComponent(this.socket);
-
-  String searchFor = "Товары";
+  SearchComponent(this.socket) : searchParams = new SearchParams();
 
   @override
-  Future onActivate(_, RouterState state) async {
-    print("search component active");
-    print(state.routePath.path);
+  Future onActivate(_, RouterState routerState) async {
+    print(routerState.routePath.path);
+  }
+
+  void search(SearchParams params) {
+    print(params.text);
   }
 }
