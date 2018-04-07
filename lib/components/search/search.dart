@@ -9,6 +9,7 @@ import 'package:honeydew/services.dart' show SocketService;
 
 class SearchParams {
   String text;
+  int currentPage, resultsOnOnePage;
 }
 
 @Component(
@@ -20,7 +21,6 @@ class SearchComponent implements OnActivate {
   SocketService socket;
 
   int countOfResults;
-  String searchValue;
   SearchParams searchParams;
 
   SearchComponent(this.socket) : searchParams = new SearchParams();
