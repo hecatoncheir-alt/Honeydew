@@ -23,14 +23,16 @@ class SearchComponent implements OnActivate {
   int countOfResults;
   SearchParams searchParams;
 
-  SearchComponent(this.socket) : searchParams = new SearchParams();
+  Router router;
+
+  SearchComponent(this.socket, this.router) : searchParams = new SearchParams();
 
   @override
-  Future onActivate(_, RouterState routerState) async {
-    print(routerState.routePath.path);
+  Future onActivate(_, RouterState newRouterState) async {
+    searchParams.text = newRouterState.parameters["text"];
   }
 
   void search(SearchParams params) {
-    print(params.text);
+    router.navigate("search/${params.text}");
   }
 }

@@ -18,12 +18,17 @@ class PageViewComponent extends OnInit {
 
   final Router router;
 
+  static RoutePath search = RoutePath(path: "search", useAsDefault: true);
+  static RoutePath searchWithParams =
+      new RoutePath(path: 'search/:text', parent: search);
+
   final List<RouteDefinition> routes = [
-    new RouteDefinition.redirect(path: '/', redirectTo: "/search"),
+    new RouteDefinition.redirect(path: '/', redirectTo: "search"),
     new RouteDefinition(
-        path: '/search',
-        component: templates.SearchComponentNgFactory,
-        useAsDefault: true),
+        routePath: search, component: templates.SearchComponentNgFactory),
+    new RouteDefinition(
+        routePath: searchWithParams,
+        component: templates.SearchComponentNgFactory)
   ];
 
   PageViewComponent(this.socketService, this.configuration, this.router);
