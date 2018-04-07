@@ -25,17 +25,30 @@ class SearchComponent implements OnActivate {
 
   Router router;
 
-  SearchComponent(this.socket, this.router) : searchParams = new SearchParams();
+  SearchComponent(this.socket, this.router)
+      : searchParams = new SearchParams()..resultsOnOnePage = 10;
 
   @override
   Future onActivate(_, RouterState newRouterState) async {
-    print(newRouterState..parameters);
     searchParams.text = newRouterState.parameters["text"];
+
+    if (newRouterState.parameters["page"] != null)
+      searchParams.currentPage = int.parse(newRouterState.parameters["page"]);
+
+    if (searchParams.currentPage == null && searchParams.text != null)
+      router.navigate("//search/${searchParams.text}/page/1");
+
+    if (searchParams.currentPage != null && searchParams.text != null)
+      this.sendRequest(this.searchParams);
   }
 
+  Future<void> sendRequest(SearchParams params) async {}
+
   void search(SearchParams params) {
-    print(params.text);
-    print("-");
-    router.navigate("//search/${params.text}");
+    if (params.currentPage == null) {
+      router.navigate("//search/${params.text}/page/1");
+    } else {
+      router.navigate("//search/${params.text}/page/${params.currentPage}");
+    }
   }
 }
