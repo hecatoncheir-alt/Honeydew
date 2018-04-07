@@ -23,7 +23,7 @@ class PageViewComponent extends OnInit {
       new RoutePath(path: 'search/:text', parent: search);
 
   final List<RouteDefinition> routes = [
-    new RouteDefinition.redirect(path: '/', redirectTo: "search"),
+    new RouteDefinition.redirect(path: '/', redirectTo: "//search"),
     new RouteDefinition(
         routePath: search, component: templates.SearchComponentNgFactory),
     new RouteDefinition(

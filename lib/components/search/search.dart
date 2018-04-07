@@ -29,10 +29,13 @@ class SearchComponent implements OnActivate {
 
   @override
   Future onActivate(_, RouterState newRouterState) async {
+    print(newRouterState..parameters);
     searchParams.text = newRouterState.parameters["text"];
   }
 
   void search(SearchParams params) {
-    router.navigate("search/${params.text}");
+    print(params.text);
+    print("-");
+    router.navigate("//search/${params.text}");
   }
 }
