@@ -2,6 +2,22 @@
   background-color: #f2f8e2;
 }
 
+::-webkit-scrollbar {
+  background: transparent;
+
+  width: 12px;
+
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f1f7e0;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 * {
   box-sizing: border-box;
   font-kerning: auto;

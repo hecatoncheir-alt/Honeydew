@@ -11,11 +11,14 @@ import 'package:honeydew/services.dart' show SocketService;
 @Component(
     selector: 'search',
     templateUrl: 'search.html',
+    styleUrls: ["search.css"],
     directives: const [MaterialAutoSuggestInputComponent],
     providers: const [SocketService, materialProviders])
 class SearchComponent implements OnActivate {
   List<String> suggestions = new List<String>();
   SocketService socket;
+
+  int countOfResults = 312;
 
   SearchComponent(this.socket);
 

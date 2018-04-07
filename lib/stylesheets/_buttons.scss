@@ -1,0 +1,30 @@
+
+.button {
+  padding: 12px 22px;
+
+  border: 1px solid #152849;
+
+  font-family: 'IBM Plex Mono';
+  font-size: 1.3em;
+  font-style: italic;
+  font-weight: 500;
+
+  transition: all 100ms ease-in-out;
+
+  color: #54b30f;
+
+  display: inline;
+
+  cursor: pointer;
+
+  &:hover {
+    color: #f2f8e2;
+
+    background-color: #182641;
+    border-color: #182641;
+  }
+}
+
+.button--submit {
+  align-self: flex-end;
+}

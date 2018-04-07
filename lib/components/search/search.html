@@ -9,4 +9,32 @@
     </nav>
   </div>
 
+  <div class="search-form">
+    <div class="search__form search-area__block">
+      <div class="input">
+        <label for="input"
+                class="input__label">
+          Название продукта, <br> категории, компании...
+        </label>
+
+        <div class="input-container">
+          <div class="icon search__icon"></div>
+          <input type="text"
+                  autofocus
+                  id="input"
+                  class="search-input">
+        </div>
+      </div>
+
+      <div class="details-block search-form__footer">
+        <div class="counter search-area__block" 
+             [style.opacity]="countOfResults == null ? 0:1">
+          <span class="counter__label">Количество совпавших позиций:</span>
+          <span class="count">{{countOfResults}}</span>
+        </div>
+        <div class="button button--submit">Найти</div>
+      </div>
+    </div>
+  </div>
+
 </section>
