@@ -2,9 +2,33 @@ library socket_service;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:collection';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+
+class SocketMessageFormat extends MapBase {
+  Map<String, dynamic> _entityMap = new Map<String, dynamic>();
+
+  String get message => this['Message'];
+  set message(String value) => this['Message'] = value;
+
+  Map<String, dynamic> get details => this['Details'];
+  set details(Map<String, dynamic> value) => this['Details'] = value;
+
+  SocketMessageFormat(String message, Map<String, dynamic> details) {
+    this["Message"] = message;
+    this["Details"] = details;
+  }
+
+  operator [](Object key) => _entityMap[key];
+  operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
+
+  get keys => _entityMap.keys;
+
+  remove(key) => _entityMap.remove(key);
+  clear() => _entityMap.clear();
+}
 
 @Injectable()
 class SocketService {
@@ -145,16 +169,11 @@ class SocketService {
   }
 
   /// Метод для отправки событий на сервер
-  Future<Null> write(String message, [Map details]) async {
-    Map data = new Map<String, dynamic>();
-
-    data['Message'] = message;
-    data['Details'] = details;
-
+  Future<Null> write(SocketMessageFormat message) async {
     /// Событие необходимо добавить в общий пул событий.
     /// Это позволит в случае разъединения отправить событие на сервер
     /// повторно при подключении.
-    String encodedData = json.encode(data);
+    String encodedData = json.encode(message);
     eventPool.add(encodedData);
 
     /// Перед отправкой сообщения нужно убедиться в том, что

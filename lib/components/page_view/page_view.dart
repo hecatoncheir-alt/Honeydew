@@ -1,5 +1,7 @@
 library page_view_component;
 
+import 'dart:html';
+
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
@@ -40,13 +42,13 @@ class PageViewComponent extends OnInit {
 
   @override
   void ngOnInit() {
-    // configuration
-    //     .getConfiguration(window.location)
-    //     .then((services.Configuration config) {
-    //   socketService.connect(
-    //       protocol: config.socket.protocol,
-    //       host: config.socket.host,
-    //       port: config.socket.port);
-    // });
+    configuration
+        .getConfiguration(window.location)
+        .then((services.Configuration config) {
+      socketService.connect(
+          protocol: config.socket.protocol,
+          host: config.socket.host,
+          port: config.socket.port);
+    });
   }
 }
