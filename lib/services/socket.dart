@@ -180,7 +180,12 @@ class SocketService {
     /// связь с socket сервером установлена.
     /// Последним параметром указывается количество секунд ожидания
     /// соединения.
-    waitForSocketConnection(socketConnection, encodedData, 5);
+    if (this.socketConnection == null) {
+      new Future(
+          () => waitForSocketConnection(this.socketConnection, encodedData, 5));
+    } else {
+      waitForSocketConnection(this.socketConnection, encodedData, 5);
+    }
   }
 
   /// Получая событие от сервера нужно JSON строку разобрать в

@@ -39,8 +39,7 @@ class SearchParams extends MapBase {
 @Component(
     selector: 'search',
     templateUrl: 'search.html',
-    styleUrls: ["search.css"],
-    providers: const [SocketService])
+    styleUrls: ["search.css"])
 class SearchComponent implements OnActivate {
   SocketService socket;
 
