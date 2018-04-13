@@ -13,12 +13,12 @@ class SocketMessageFormat extends MapBase {
   String get message => this['Message'];
   set message(String value) => this['Message'] = value;
 
-  Map<String, dynamic> get details => this['Details'];
-  set details(Map<String, dynamic> value) => this['Details'] = value;
+  Map<String, dynamic> get data => this['Data'];
+  set data(Map<String, dynamic> value) => this['Data'] = value;
 
-  SocketMessageFormat(String message, Map<String, dynamic> details) {
+  SocketMessageFormat(String message, Map<String, dynamic> data) {
     this["Message"] = message;
-    this["Details"] = details;
+    this["Data"] = data;
   }
 
   operator [](Object key) => _entityMap[key];
@@ -170,10 +170,15 @@ class SocketService {
 
   /// Метод для отправки событий на сервер
   Future<Null> write(SocketMessageFormat message) async {
+    Map<String, String> details = <String, String>{
+      "Message": message.message,
+      "Data": json.encode(message.data)
+    };
+
     /// Событие необходимо добавить в общий пул событий.
     /// Это позволит в случае разъединения отправить событие на сервер
     /// повторно при подключении.
-    String encodedData = json.encode(message);
+    String encodedData = json.encode(details);
     eventPool.add(encodedData);
 
     /// Перед отправкой сообщения нужно убедиться в том, что

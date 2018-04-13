@@ -12,19 +12,22 @@ import 'package:honeydew/services.dart' show SocketService, SocketMessageFormat;
 class SearchParams extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
-  String get text => this['text'];
-  set text(String value) => this['text'] = value;
+  String get Language => this['Language'];
+  set Language(String value) => this['Language'] = value;
 
-  int get currentPage => this['currentPage'];
-  set currentPage(int value) => this['currentPage'] = value;
+  String get SearchedName => this['SearchedName'];
+  set SearchedName(String value) => this['SearchedName'] = value;
 
-  int get resultsOnOnePage => this['resultsOnOnePage'];
-  set resultsOnOnePage(int value) => this['resultsOnOnePage'] = value;
+  int get CurrentPage => this['CurrentPage'];
+  set CurrentPage(int value) => this['CurrentPage'] = value;
 
-  SearchParams({String text, int currentPage, int resultsOnOnePage}) {
-    this["text"] = text;
-    this["currentPage"] = currentPage;
-    this["resultsOnOnePage"] = resultsOnOnePage;
+  int get CountProductsOnPage => this['CountProductsOnPage'];
+  set CountProductsOnPage(int value) => this['CountProductsOnPage'] = value;
+
+  SearchParams({String SearchedName, int CurrentPage, int CountProductsOnPage}) {
+    this["SearchedName"] = SearchedName;
+    this["CurrentPage"] = CurrentPage;
+    this["CountProductsOnPage"] = CountProductsOnPage;
   }
 
   operator [](Object key) => _entityMap[key];
@@ -37,9 +40,7 @@ class SearchParams extends MapBase {
 }
 
 @Component(
-    selector: 'search',
-    templateUrl: 'search.html',
-    styleUrls: ["search.css"])
+    selector: 'search', templateUrl: 'search.html', styleUrls: ["search.css"])
 class SearchComponent implements OnActivate {
   SocketService socket;
 
@@ -49,19 +50,21 @@ class SearchComponent implements OnActivate {
   Router router;
 
   SearchComponent(this.socket, this.router)
-      : searchParams = new SearchParams()..resultsOnOnePage = 10;
+      : searchParams = new SearchParams()
+          ..CountProductsOnPage = 10
+          ..Language = "ru";
 
   @override
   Future onActivate(_, RouterState newRouterState) async {
-    searchParams.text = newRouterState.parameters["text"];
+    searchParams.SearchedName = newRouterState.parameters["text"];
 
     if (newRouterState.parameters["page"] != null)
-      searchParams.currentPage = int.parse(newRouterState.parameters["page"]);
+      searchParams.CurrentPage = int.parse(newRouterState.parameters["page"]);
 
-    if (searchParams.currentPage == null && searchParams.text != null)
-      router.navigate("//search/${searchParams.text}/page/1");
+    if (searchParams.CurrentPage == null && searchParams.SearchedName != null)
+      router.navigate("//search/${searchParams.SearchedName}/page/1");
 
-    if (searchParams.currentPage != null && searchParams.text != null)
+    if (searchParams.CurrentPage != null && searchParams.SearchedName != null)
       this.sendRequest(this.searchParams);
   }
 
@@ -72,10 +75,10 @@ class SearchComponent implements OnActivate {
   }
 
   void search(SearchParams params) {
-    if (params.currentPage == null) {
-      router.navigate("//search/${params.text}/page/1");
+    if (params.CurrentPage == null) {
+      router.navigate("//search/${params.SearchedName}/page/1");
     } else {
-      router.navigate("//search/${params.text}/page/${params.currentPage}");
+      router.navigate("//search/${params.SearchedName}/page/${params.CurrentPage}");
     }
   }
 }

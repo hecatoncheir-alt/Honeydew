@@ -20,8 +20,8 @@
         <div class="input-container">
           <div class="icon search__icon"></div>
           <input type="text"
-                 [value]="searchParams.text"
-                 (keyup)="searchParams.text=$event.target.value"
+                 [value]="searchParams.SearchedName"
+                 (keyup)="searchParams.SearchedName=$event.target.value"
                  (keyup.enter)="search(searchParams)"
                  autofocus
                  class="search-input">
