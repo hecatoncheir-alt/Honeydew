@@ -1,32 +1,36 @@
 library socket_service;
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
 
-class SocketMessageFormat extends MapBase {
+class EventData extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get message => this['Message'];
+
   set message(String value) => this['Message'] = value;
 
-  Map<String, dynamic> get data => this['Data'];
-  set data(Map<String, dynamic> value) => this['Data'] = value;
+  String get data => this['Data'];
 
-  SocketMessageFormat(String message, Map<String, dynamic> data) {
+  set data(String value) => this['Data'] = value;
+
+  EventData(String message, String data) {
     this["Message"] = message;
     this["Data"] = data;
   }
 
   operator [](Object key) => _entityMap[key];
+
   operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
 
   get keys => _entityMap.keys;
 
   remove(key) => _entityMap.remove(key);
+
   clear() => _entityMap.clear();
 }
 
@@ -169,16 +173,11 @@ class SocketService {
   }
 
   /// Метод для отправки событий на сервер
-  Future<Null> write(SocketMessageFormat message) async {
-    Map<String, String> details = <String, String>{
-      "Message": message.message,
-      "Data": json.encode(message.data)
-    };
-
+  Future<Null> write(EventData message) async {
     /// Событие необходимо добавить в общий пул событий.
     /// Это позволит в случае разъединения отправить событие на сервер
     /// повторно при подключении.
-    String encodedData = json.encode(details);
+    String encodedData = json.encode(message);
     eventPool.add(encodedData);
 
     /// Перед отправкой сообщения нужно убедиться в том, что

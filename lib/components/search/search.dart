@@ -1,41 +1,47 @@
 library search;
 
 import 'dart:async';
-
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
-
-import 'package:honeydew/services.dart' show SocketService, SocketMessageFormat;
+import 'package:honeydew/services.dart' show SocketService, EventData;
 
 class SearchParams extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get Language => this['Language'];
+
   set Language(String value) => this['Language'] = value;
 
   String get SearchedName => this['SearchedName'];
+
   set SearchedName(String value) => this['SearchedName'] = value;
 
   int get CurrentPage => this['CurrentPage'];
+
   set CurrentPage(int value) => this['CurrentPage'] = value;
 
   int get CountProductsOnPage => this['CountProductsOnPage'];
+
   set CountProductsOnPage(int value) => this['CountProductsOnPage'] = value;
 
-  SearchParams({String SearchedName, int CurrentPage, int CountProductsOnPage}) {
+  SearchParams(
+      {String SearchedName, int CurrentPage, int CountProductsOnPage}) {
     this["SearchedName"] = SearchedName;
     this["CurrentPage"] = CurrentPage;
     this["CountProductsOnPage"] = CountProductsOnPage;
   }
 
   operator [](Object key) => _entityMap[key];
+
   operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
 
   get keys => _entityMap.keys;
 
   remove(key) => _entityMap.remove(key);
+
   clear() => _entityMap.clear();
 }
 
@@ -52,7 +58,11 @@ class SearchComponent implements OnActivate {
   SearchComponent(this.socket, this.router)
       : searchParams = new SearchParams()
           ..CountProductsOnPage = 10
-          ..Language = "ru";
+          ..Language = "ru" {
+    socket.data.listen((e) {
+      print(e);
+    });
+  }
 
   @override
   Future onActivate(_, RouterState newRouterState) async {
@@ -69,8 +79,8 @@ class SearchComponent implements OnActivate {
   }
 
   Future<void> sendRequest(SearchParams params) async {
-    SocketMessageFormat message = new SocketMessageFormat(
-        "Need items by name", params as Map<String, dynamic>);
+    String encodedParams = json.encode(params);
+    EventData message = new EventData("Need items by name", encodedParams);
     socket.write(message);
   }
 
@@ -78,7 +88,8 @@ class SearchComponent implements OnActivate {
     if (params.CurrentPage == null) {
       router.navigate("//search/${params.SearchedName}/page/1");
     } else {
-      router.navigate("//search/${params.SearchedName}/page/${params.CurrentPage}");
+      router.navigate(
+          "//search/${params.SearchedName}/page/${params.CurrentPage}");
     }
   }
 }
