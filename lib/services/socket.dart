@@ -18,7 +18,7 @@ class EventData extends MapBase {
 
   set data(String value) => this['Data'] = value;
 
-  EventData(String message, String data) {
+  EventData(String message, [String data]) {
     this["Message"] = message;
     this["Data"] = data;
   }
@@ -47,14 +47,14 @@ class SocketService {
 
   StreamController dataControl = new StreamController();
 
-  Stream<Map> data;
+  Stream<EventData> data;
 
   String protocol, host;
   int port;
 
   /// Конструктор сервиса
   SocketService() {
-    data = dataControl.stream.asBroadcastStream() as Stream<Map>;
+    data = dataControl.stream.asBroadcastStream() as Stream<EventData>;
   }
 
   /// Подключение к серверу
@@ -86,7 +86,7 @@ class SocketService {
           }
 
           // Отправление уведомления об успешном переподключении
-          dataControl.add({'Message': "Client reconnected to server"});
+          dataControl.add(new EventData("Client reconnected to server"));
         }
 
         reconnectionInProgress = false;
@@ -100,7 +100,7 @@ class SocketService {
       /// При закрытии соединения, нужно оповестить об этом
       /// другие компоненты. И начать подключение заново.
       socketConnection.onClose.listen((_) {
-        dataControl.add({'Message': "Connection closed"});
+        dataControl.add(new EventData("Connection closed"));
         print("Socket connection is closed");
 
         /// В случае разрыва соединения необходимо осуществить попытку
@@ -198,16 +198,18 @@ class SocketService {
   /// Метод может разобрать как строку так и событие которое
   /// содержит в себе строку. Это делает метод более универсальным,
   /// и позволяет проще реализовать Mock сервиса.
-  Future<Map> _decodeSocketData(event) async {
-    Map data;
-    if (event is String) data = json.decode(event);
-    if (event is MessageEvent) data = json.decode(event.data);
+  Future<EventData> _decodeSocketData(event) async {
+    Map<String, dynamic> details;
 
+    if (event is String) details = json.decode(event);
+    if (event is MessageEvent) details = json.decode(event.data);
+
+    EventData data = new EventData(details["Message"], details["Data"]);
     return data;
   }
 
   /// После того как данные о событии с сервера будут представлены
   /// в виде структуры Map, их можно отправлять в поток событий: data,
   /// на который подписывaются остальные сервисы и компоненты.
-  void _finalizeData(Map socketData) => dataControl.add(socketData);
+  void _finalizeData(EventData socketData) => dataControl.add(socketData);
 }

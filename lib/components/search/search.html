@@ -30,9 +30,9 @@
 
       <div class="details-block search-form__footer">
         <div class="counter search-area__block" 
-             [style.opacity]="countOfResults == null ? 0:1">
+             [style.opacity]="searchResponse.TotalProductsFound == null ? 0:1">
           <span class="counter__label">Количество совпавших позиций:</span>
-          <span class="count">{{countOfResults}}</span>
+          <span class="count">{{searchResponse.TotalProductsFound}}</span>
         </div>
         <div class="button button--submit" 
              (click)="search(searchParams)">Найти</div>

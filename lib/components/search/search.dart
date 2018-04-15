@@ -12,19 +12,15 @@ class SearchParams extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get Language => this['Language'];
-
   set Language(String value) => this['Language'] = value;
 
   String get SearchedName => this['SearchedName'];
-
   set SearchedName(String value) => this['SearchedName'] = value;
 
   int get CurrentPage => this['CurrentPage'];
-
   set CurrentPage(int value) => this['CurrentPage'] = value;
 
   int get CountProductsOnPage => this['CountProductsOnPage'];
-
   set CountProductsOnPage(int value) => this['CountProductsOnPage'] = value;
 
   SearchParams(
@@ -45,22 +41,62 @@ class SearchParams extends MapBase {
   clear() => _entityMap.clear();
 }
 
+class SearchResponse extends SearchParams {
+  Map<String, dynamic> get entityMap => super._entityMap;
+  set entityMap(Map<String, dynamic> map) => super._entityMap = map;
+
+  SearchResponse(
+      {String SearchedName,
+      int CurrentPage,
+      int CountProductsOnPage,
+      int TotalProductsFound,
+      int TotalProductsOnOnePage}) {
+    super.SearchedName = SearchedName;
+    super.CurrentPage = CurrentPage;
+    super.CountProductsOnPage = CountProductsOnPage;
+
+    this
+      ..TotalProductsFound = TotalProductsFound
+      ..TotalProductsOnOnePage = TotalProductsOnOnePage;
+  }
+
+  SearchResponse.fromMap(Map<String, dynamic> map) {
+    entityMap = map;
+  }
+
+  int get TotalProductsOnOnePage => this['TotalProductsOnOnePage'];
+  set TotalProductsOnOnePage(int value) =>
+      this['TotalProductsOnOnePage'] = value;
+
+  int get TotalProductsFound => this['TotalProductsFound'];
+  set TotalProductsFound(int value) => this['TotalProductsFound'] = value;
+
+  String get SearchedName => this['SearchedName'];
+  set SearchedName(String value) => this['SearchedName'] = value;
+}
+
 @Component(
     selector: 'search', templateUrl: 'search.html', styleUrls: ["search.css"])
 class SearchComponent implements OnActivate {
   SocketService socket;
 
-  int countOfResults;
   SearchParams searchParams;
+  SearchResponse searchResponse = new SearchResponse();
 
   Router router;
 
   SearchComponent(this.socket, this.router)
       : searchParams = new SearchParams()
           ..CountProductsOnPage = 10
-          ..Language = "ru" {
-    socket.data.listen((e) {
-      print(e);
+          ..Language = "ru",
+        searchResponse = new SearchResponse() {
+    socket.data.listen((EventData event) async {
+      switch (event.message) {
+        case "Items by name not found":
+          this.searchResponse =
+              new SearchResponse.fromMap(json.decode(event.data));
+          break;
+      }
     });
   }
 
