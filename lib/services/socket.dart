@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:honeydew/services.dart'
+    show ConfigurationService, Configuration;
 
 class EventData extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -18,9 +20,14 @@ class EventData extends MapBase {
 
   set data(String value) => this['Data'] = value;
 
-  EventData(String message, [String data]) {
+  String get APIVersion => this['APIVersion'];
+
+  set APIVersion(String value) => this['APIVersion'] = value;
+
+  EventData(String message, [String data, String apiVersion]) {
     this["Message"] = message;
     this["Data"] = data;
+    this["APIVersion"] = apiVersion;
   }
 
   operator [](Object key) => _entityMap[key];
@@ -52,8 +59,10 @@ class SocketService {
   String protocol, host;
   int port;
 
+  ConfigurationService configurationService;
+
   /// Конструктор сервиса
-  SocketService() {
+  SocketService(this.configurationService) {
     data = dataControl.stream.asBroadcastStream() as Stream<EventData>;
   }
 
@@ -145,15 +154,22 @@ class SocketService {
   /// Функция которая ожидает подключения к socket серверу перед тем как
   /// отправить событие.
   void waitForSocketConnection(
-      WebSocket socket, String eventData, int iterator) {
+      WebSocket socket, EventData eventData, int iterator) {
     if (iterator != 0) {
       iterator--;
       // Используется таймер
       new Timer(new Duration(seconds: 1), () {
         if (socket.readyState == 1) {
+          eventData.APIVersion = configurationService.config.apiVersion;
+
+          /// Событие необходимо добавить в общий пул событий.
+          /// Это позволит в случае разъединения отправить событие на сервер
+          /// повторно при подключении.
+          String encodedData = json.encode(eventData);
+
           /// Когда подключение к серверу будет установлено,
           /// сообщение будет отправлено.
-          socket.send(eventData);
+          socket.send(encodedData);
 
           /// В случае успешной отправки события на сервер
           /// его можно удалять из списка не отправленных событий.
@@ -177,8 +193,7 @@ class SocketService {
     /// Событие необходимо добавить в общий пул событий.
     /// Это позволит в случае разъединения отправить событие на сервер
     /// повторно при подключении.
-    String encodedData = json.encode(message);
-    eventPool.add(encodedData);
+    eventPool.add(message);
 
     /// Перед отправкой сообщения нужно убедиться в том, что
     /// связь с socket сервером установлена.
@@ -186,9 +201,9 @@ class SocketService {
     /// соединения.
     if (this.socketConnection == null) {
       new Future(
-          () => waitForSocketConnection(this.socketConnection, encodedData, 5));
+          () => waitForSocketConnection(this.socketConnection, message, 5));
     } else {
-      waitForSocketConnection(this.socketConnection, encodedData, 5);
+      waitForSocketConnection(this.socketConnection, message, 5);
     }
   }
 
@@ -204,12 +219,19 @@ class SocketService {
     if (event is String) details = json.decode(event);
     if (event is MessageEvent) details = json.decode(event.data);
 
-    EventData data = new EventData(details["Message"], details["Data"]);
+    if (details["APIVersion"] != configurationService.config.apiVersion)
+      return null;
+
+    EventData data = new EventData(
+        details["Message"], details["Data"], details["APIVersion"]);
+
     return data;
   }
 
   /// После того как данные о событии с сервера будут представлены
   /// в виде структуры Map, их можно отправлять в поток событий: data,
   /// на который подписывaются остальные сервисы и компоненты.
-  void _finalizeData(EventData socketData) => dataControl.add(socketData);
+  void _finalizeData(EventData socketData) {
+    if (socketData != null) dataControl.add(socketData);
+  }
 }

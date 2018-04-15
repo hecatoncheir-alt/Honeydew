@@ -15,8 +15,11 @@ class _SocketServerConfig {
 
 class Configuration {
   _SocketServerConfig socket;
+  String apiVersion;
 
   Configuration.fromMap(Map conf) {
+    this.apiVersion = conf["APIVersion"];
+
     socket = new _SocketServerConfig(conf['socket']['protocol'],
         conf['socket']['ip'], conf['socket']['port']);
   }

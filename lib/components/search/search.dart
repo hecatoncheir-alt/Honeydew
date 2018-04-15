@@ -12,14 +12,15 @@ import 'package:honeydew/services/routes/paths.dart' as paths;
 
 @Component(
     selector: 'search', templateUrl: 'search.html', styleUrls: ["search.css"])
-class SearchComponent implements OnActivate, OnInit {
+class SearchComponent implements OnActivate, OnInit, OnDestroy {
+  Router router;
+
   SocketService socket;
+  StreamSubscription<EventData> subscription;
 
   ProductsForPageSearchParams productsForPageSearchParams;
   ProductsForPageSearchResponse productsForPageSearchResponse =
       new ProductsForPageSearchResponse();
-
-  Router router;
 
   Element el;
   InputElement searchField;
@@ -28,8 +29,13 @@ class SearchComponent implements OnActivate, OnInit {
       : productsForPageSearchParams = new ProductsForPageSearchParams()
           ..CountProductsOnPage = 10
           ..Language = "ru",
-        productsForPageSearchResponse = new ProductsForPageSearchResponse() {
-    socket.data.listen((EventData event) async {
+        productsForPageSearchResponse = new ProductsForPageSearchResponse();
+
+  Future<Null> subscribeOnEvents(Stream<EventData> stream) async {
+    this.subscription = stream.listen((EventData event) {
+      // TODO
+      print(event);
+
       switch (event.message) {
         case "Items by name not found":
           this.productsForPageSearchResponse =
@@ -49,12 +55,18 @@ class SearchComponent implements OnActivate, OnInit {
   }
 
   @override
-  ngOnInit() {
+  void ngOnInit() {
     this.searchField = el.querySelector("#search__field");
+    this.subscribeOnEvents(socket.data);
   }
 
   @override
-  void onActivate(_, RouterState newRouterState) async {
+  void ngOnDestroy() {
+    this.subscription.cancel();
+  }
+
+  @override
+  void onActivate(_, RouterState newRouterState) {
     productsForPageSearchParams.SearchedName =
         newRouterState.parameters["text"];
 
@@ -64,7 +76,7 @@ class SearchComponent implements OnActivate, OnInit {
 
     if (productsForPageSearchParams.CurrentPage == null &&
         productsForPageSearchParams.SearchedName != null)
-      this.router.navigate(paths.search.toUrl(parameters: {
+      this.router.navigate(paths.searchWithPageParams.toUrl(parameters: {
             "text": productsForPageSearchParams.SearchedName,
             "page": "1"
           }));

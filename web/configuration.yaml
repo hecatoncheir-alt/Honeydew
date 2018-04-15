@@ -1,4 +1,5 @@
 production:
+  APIVersion: "1.0.0"
   socket:
     protocol: "ws"
     ip: "localhost"
