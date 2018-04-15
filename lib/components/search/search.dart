@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:honeydew/services.dart' show SocketService, EventData;
+import 'package:honeydew/services/routes/paths.dart' as paths;
 
 class SearchParams extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -96,6 +97,11 @@ class SearchComponent implements OnActivate {
           this.searchResponse =
               new SearchResponse.fromMap(json.decode(event.data));
           break;
+
+        case "Items by name ready":
+          this.searchResponse =
+              new SearchResponse.fromMap(json.decode(event.data));
+          break;
       }
     });
   }
@@ -108,7 +114,8 @@ class SearchComponent implements OnActivate {
       searchParams.CurrentPage = int.parse(newRouterState.parameters["page"]);
 
     if (searchParams.CurrentPage == null && searchParams.SearchedName != null)
-      router.navigate("//search/${searchParams.SearchedName}/page/1");
+      this.router.navigate(paths.search
+          .toUrl(parameters: {"text": searchParams.SearchedName, "page": "1"}));
 
     if (searchParams.CurrentPage != null && searchParams.SearchedName != null)
       this.sendRequest(this.searchParams);
@@ -122,10 +129,13 @@ class SearchComponent implements OnActivate {
 
   void search(SearchParams params) {
     if (params.CurrentPage == null) {
-      router.navigate("//search/${params.SearchedName}/page/1");
+      this.router.navigate(paths.searchWithPageParams
+          .toUrl(parameters: {"text": params.SearchedName, "page": "1"}));
     } else {
-      router.navigate(
-          "//search/${params.SearchedName}/page/${params.CurrentPage}");
+      this.router.navigate(paths.searchWithPageParams.toUrl(parameters: {
+            "text": params.SearchedName,
+            "page": params.CurrentPage.toString()
+          }));
     }
   }
 }
