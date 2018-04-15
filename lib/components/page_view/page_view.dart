@@ -10,17 +10,8 @@ import 'package:honeydew/services.dart' as services;
 @Component(
     selector: 'page-view',
     templateUrl: 'page_view.html',
-    styleUrls: const [
-      'page_view.css'
-    ],
-    directives: const [
-      routerDirectives
-    ],
-    providers: const [
-      const ClassProvider(services.SocketService),
-      const ClassProvider(services.ConfigurationService),
-      const ClassProvider(services.Routes)
-    ])
+    styleUrls: const ['page_view.css'],
+    directives: const [routerDirectives])
 class PageViewComponent extends OnInit {
   final services.SocketService socketService;
   final services.ConfigurationService configuration;
