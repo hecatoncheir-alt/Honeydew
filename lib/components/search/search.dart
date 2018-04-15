@@ -14,26 +14,27 @@ import 'package:honeydew/services/routes/paths.dart' as paths;
 class SearchComponent implements OnActivate {
   SocketService socket;
 
-  SearchParams searchParams;
-  SearchResponse searchResponse = new SearchResponse();
+  ProductsForPageSearchParams productsForPageSearchParams;
+  ProductsForPageSearchResponse productsForPageSearchResponse =
+      new ProductsForPageSearchResponse();
 
   Router router;
 
   SearchComponent(this.socket, this.router)
-      : searchParams = new SearchParams()
+      : productsForPageSearchParams = new ProductsForPageSearchParams()
           ..CountProductsOnPage = 10
           ..Language = "ru",
-        searchResponse = new SearchResponse() {
+        productsForPageSearchResponse = new ProductsForPageSearchResponse() {
     socket.data.listen((EventData event) async {
       switch (event.message) {
         case "Items by name not found":
-          this.searchResponse =
-              new SearchResponse.fromMap(json.decode(event.data));
+          this.productsForPageSearchResponse = new ProductsForPageSearchResponse.fromMap(
+              json.decode(event.data));
           break;
 
         case "Items by name ready":
-          this.searchResponse =
-              new SearchResponse.fromMap(json.decode(event.data));
+          this.productsForPageSearchResponse = new ProductsForPageSearchResponse.fromMap(
+              json.decode(event.data));
           break;
       }
     });
@@ -41,26 +42,26 @@ class SearchComponent implements OnActivate {
 
   @override
   Future onActivate(_, RouterState newRouterState) async {
-    searchParams.SearchedName = newRouterState.parameters["text"];
+    productsForPageSearchParams.SearchedName = newRouterState.parameters["text"];
 
     if (newRouterState.parameters["page"] != null)
-      searchParams.CurrentPage = int.parse(newRouterState.parameters["page"]);
+      productsForPageSearchParams.CurrentPage = int.parse(newRouterState.parameters["page"]);
 
-    if (searchParams.CurrentPage == null && searchParams.SearchedName != null)
+    if (productsForPageSearchParams.CurrentPage == null && productsForPageSearchParams.SearchedName != null)
       this.router.navigate(paths.search
-          .toUrl(parameters: {"text": searchParams.SearchedName, "page": "1"}));
+          .toUrl(parameters: {"text": productsForPageSearchParams.SearchedName, "page": "1"}));
 
-    if (searchParams.CurrentPage != null && searchParams.SearchedName != null)
-      this.sendRequest(this.searchParams);
+    if (productsForPageSearchParams.CurrentPage != null && productsForPageSearchParams.SearchedName != null)
+      this.searchProducts(this.productsForPageSearchParams);
   }
 
-  Future<void> sendRequest(SearchParams params) async {
+  Future<void> searchProducts(ProductsForPageSearchParams params) async {
     String encodedParams = json.encode(params);
     EventData message = new EventData("Need items by name", encodedParams);
     socket.write(message);
   }
 
-  void search(SearchParams params) {
+  void search(ProductsForPageSearchParams params) {
     if (params.CurrentPage == null) {
       this.router.navigate(paths.searchWithPageParams
           .toUrl(parameters: {"text": params.SearchedName, "page": "1"}));
@@ -119,7 +120,7 @@ class Product extends MapBase {
   clear() => _entityMap.clear();
 }
 
-class SearchParams extends MapBase {
+class ProductsForPageSearchParams extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get Language => this['Language'];
@@ -134,7 +135,7 @@ class SearchParams extends MapBase {
   int get CountProductsOnPage => this['CountProductsOnPage'];
   set CountProductsOnPage(int value) => this['CountProductsOnPage'] = value;
 
-  SearchParams(
+  ProductsForPageSearchParams(
       {String SearchedName, int CurrentPage, int CountProductsOnPage}) {
     this["SearchedName"] = SearchedName;
     this["CurrentPage"] = CurrentPage;
@@ -152,11 +153,11 @@ class SearchParams extends MapBase {
   clear() => _entityMap.clear();
 }
 
-class SearchResponse extends SearchParams {
+class ProductsForPageSearchResponse extends ProductsForPageSearchParams {
   Map<String, dynamic> get entityMap => super._entityMap;
   set entityMap(Map<String, dynamic> map) => super._entityMap = map;
 
-  SearchResponse(
+  ProductsForPageSearchResponse(
       {String SearchedName,
       int CurrentPage,
       int CountProductsOnPage,
@@ -171,7 +172,7 @@ class SearchResponse extends SearchParams {
       ..TotalProductsOnOnePage = TotalProductsOnOnePage;
   }
 
-  SearchResponse.fromMap(Map<String, dynamic> map) {
+  ProductsForPageSearchResponse.fromMap(Map<String, dynamic> map) {
     entityMap = map;
     List<Product> products = new List<Product>();
     for (Map prod in map["Products"]) {

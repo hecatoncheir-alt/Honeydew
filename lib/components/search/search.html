@@ -20,9 +20,9 @@
         <div class="input-container">
           <div class="icon search__icon"></div>
           <input type="text"
-                 [value]="searchParams.SearchedName"
-                 (keyup)="searchParams.SearchedName=$event.target.value"
-                 (keyup.enter)="search(searchParams)"
+                 [value]="productsForPageSearchParams.SearchedName"
+                 (keyup)="productsForPageSearchParams.SearchedName=$event.target.value"
+                 (keyup.enter)="search(productsForPageSearchParams)"
                  autofocus
                  class="search-input">
         </div>
@@ -30,12 +30,12 @@
 
       <div class="details-block search-form__footer">
         <div class="counter search-area__block" 
-             [style.opacity]="searchResponse.TotalProductsFound == null ? 0:1">
+             [style.opacity]="productsForPageSearchResponse.TotalProductsFound == null ? 0:1">
           <span class="counter__label">Количество совпавших позиций:</span>
-          <span class="count">{{searchResponse.TotalProductsFound}}</span>
+          <span class="count">{{productsForPageSearchResponse.TotalProductsFound}}</span>
         </div>
         <div class="button button--submit" 
-             (click)="search(searchParams)">Найти</div>
+             (click)="search(productsForPageSearchParams)">Найти</div>
       </div>
     </div>
   </div>
