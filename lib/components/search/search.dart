@@ -3,6 +3,7 @@ library search;
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
@@ -11,7 +12,7 @@ import 'package:honeydew/services/routes/paths.dart' as paths;
 
 @Component(
     selector: 'search', templateUrl: 'search.html', styleUrls: ["search.css"])
-class SearchComponent implements OnActivate {
+class SearchComponent implements OnActivate, OnInit {
   SocketService socket;
 
   ProductsForPageSearchParams productsForPageSearchParams;
@@ -20,7 +21,10 @@ class SearchComponent implements OnActivate {
 
   Router router;
 
-  SearchComponent(this.socket, this.router)
+  Element el;
+  InputElement searchField;
+
+  SearchComponent(this.socket, this.router, this.el)
       : productsForPageSearchParams = new ProductsForPageSearchParams()
           ..CountProductsOnPage = 10
           ..Language = "ru",
@@ -28,30 +32,45 @@ class SearchComponent implements OnActivate {
     socket.data.listen((EventData event) async {
       switch (event.message) {
         case "Items by name not found":
-          this.productsForPageSearchResponse = new ProductsForPageSearchResponse.fromMap(
-              json.decode(event.data));
+          this.productsForPageSearchResponse =
+              new ProductsForPageSearchResponse.fromMap(
+                  json.decode(event.data));
+          searchField.focus();
           break;
 
         case "Items by name ready":
-          this.productsForPageSearchResponse = new ProductsForPageSearchResponse.fromMap(
-              json.decode(event.data));
+          this.productsForPageSearchResponse =
+              new ProductsForPageSearchResponse.fromMap(
+                  json.decode(event.data));
+          searchField.focus();
           break;
       }
     });
   }
 
   @override
-  Future onActivate(_, RouterState newRouterState) async {
-    productsForPageSearchParams.SearchedName = newRouterState.parameters["text"];
+  ngOnInit() {
+    this.searchField = el.querySelector("#search__field");
+  }
+
+  @override
+  void onActivate(_, RouterState newRouterState) async {
+    productsForPageSearchParams.SearchedName =
+        newRouterState.parameters["text"];
 
     if (newRouterState.parameters["page"] != null)
-      productsForPageSearchParams.CurrentPage = int.parse(newRouterState.parameters["page"]);
+      productsForPageSearchParams.CurrentPage =
+          int.parse(newRouterState.parameters["page"]);
 
-    if (productsForPageSearchParams.CurrentPage == null && productsForPageSearchParams.SearchedName != null)
-      this.router.navigate(paths.search
-          .toUrl(parameters: {"text": productsForPageSearchParams.SearchedName, "page": "1"}));
+    if (productsForPageSearchParams.CurrentPage == null &&
+        productsForPageSearchParams.SearchedName != null)
+      this.router.navigate(paths.search.toUrl(parameters: {
+            "text": productsForPageSearchParams.SearchedName,
+            "page": "1"
+          }));
 
-    if (productsForPageSearchParams.CurrentPage != null && productsForPageSearchParams.SearchedName != null)
+    if (productsForPageSearchParams.CurrentPage != null &&
+        productsForPageSearchParams.SearchedName != null)
       this.searchProducts(this.productsForPageSearchParams);
   }
 

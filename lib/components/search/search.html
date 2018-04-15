@@ -20,6 +20,7 @@
         <div class="input-container">
           <div class="icon search__icon"></div>
           <input type="text"
+                 id="search__field"
                  [value]="productsForPageSearchParams.SearchedName"
                  (keyup)="productsForPageSearchParams.SearchedName=$event.target.value"
                  (keyup.enter)="search(productsForPageSearchParams)"
