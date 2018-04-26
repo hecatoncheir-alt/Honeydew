@@ -48,10 +48,19 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
           this.productsForPageSearchResponse =
               new ProductsForPageSearchResponse.fromMap(
                   json.decode(event.data));
+          prepareCompaniesOfProducts(
+              this.productsForPageSearchResponse.Products);
+
           searchField.focus();
           break;
       }
     });
+  }
+
+  Future<List<Company>> prepareCompaniesOfProducts(
+      List<Product> products) async {
+    print(products.length);
+    print(products.first);
   }
 
   @override
@@ -146,6 +155,28 @@ class Company extends MapBase {
   clear() => _entityMap.clear();
 }
 
+//TODO
+class Price extends MapBase {
+  Map<String, dynamic> _entityMap = new Map<String, dynamic>();
+
+  String get uid => this['uid'];
+  set uid(String value) => this['uid'] = value;
+
+  Price.fromMap(Map map) {
+    this._entityMap = map;
+  }
+
+  operator [](Object key) => _entityMap[key];
+
+  operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
+
+  get keys => _entityMap.keys;
+
+  remove(key) => _entityMap.remove(key);
+
+  clear() => _entityMap.clear();
+}
+
 class Product extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
@@ -164,6 +195,9 @@ class Product extends MapBase {
   bool get productIsActive => this._entityMap['productIsActive'];
   set productIsActive(bool value) => this['productIsActive'] = value;
 
+  List<Price> get hasPrice => this['has_price'];
+  set hasPrice(List<Price> value) => this['has_price'] = value;
+
   Product(
       {String uid,
       String productName,
@@ -179,6 +213,13 @@ class Product extends MapBase {
 
   Product.fromMap(Map map) {
     this._entityMap = map;
+
+    List<Price> prices = new List<Price>();
+    for (Map price in map["has_price"]) {
+      prices.add(new Price.fromMap(price));
+    }
+
+    _entityMap["has_price"] = prices;
   }
 
   operator [](Object key) => _entityMap[key];
