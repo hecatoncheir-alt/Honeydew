@@ -6,8 +6,7 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
-import 'package:honeydew/services.dart'
-    show ConfigurationService, Configuration;
+import 'package:honeydew/services.dart' show ConfigurationService;
 
 class EventData extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
