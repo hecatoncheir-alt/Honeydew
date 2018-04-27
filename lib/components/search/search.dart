@@ -33,9 +33,6 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   Future<Null> subscribeOnEvents(Stream<EventData> stream) async {
     this.subscription = stream.listen((EventData event) {
-      // TODO
-      print(event);
-
       switch (event.message) {
         case "Items by name not found":
           this.productsForPageSearchResponse =
@@ -51,6 +48,12 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
           prepareCompaniesOfProducts(
               this.productsForPageSearchResponse.Products);
 
+          prepareCompaniesOfProducts(
+                  this.productsForPageSearchResponse.Products)
+              .then((List<Company> companies) {
+            print(companies);
+          });
+
           searchField.focus();
           break;
       }
@@ -59,8 +62,17 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   Future<List<Company>> prepareCompaniesOfProducts(
       List<Product> products) async {
-    print(products.length);
-    print(products.first);
+    List<Company> companiesOfProductsPrices = new List<Company>();
+    for (Product product in products) {
+      for (Price price in product.hasPrice) {
+        for (Company company in price.belongsToCompany) {
+          if (companiesOfProductsPrices.contains(company)) continue;
+          companiesOfProductsPrices.add(company);
+        }
+      }
+    }
+
+    return companiesOfProductsPrices;
   }
 
   @override
@@ -155,15 +167,38 @@ class Company extends MapBase {
   clear() => _entityMap.clear();
 }
 
-//TODO
 class Price extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
 
+  String get priceValue => this['priceValue'];
+  set priceValue(String value) => this['priceValue'] = value;
+
+  //TODO
+//  String get priceDateTime => this['priceDateTime'];
+//  set priceDateTime(String value) => this['priceDateTime'] = value;
+
+  bool get priceIsActive => this['priceIsActive'];
+  set priceIsActive(bool value) => this['priceIsActive'] = value;
+
+  List<Company> get belongsToCompany => this['belongs_to_company'];
+  set belongsToCompany(List<Company> value) =>
+      this['belongs_to_company'] = value;
+
+  //TODO
+//  belongs_to_city
+
   Price.fromMap(Map map) {
     this._entityMap = map;
+
+    List<Company> companies = new List<Company>();
+    for (Map company in map["belongs_to_company"]) {
+      companies.add(new Company.fromMap(company));
+    }
+
+    this._entityMap["belongs_to_company"] = companies;
   }
 
   operator [](Object key) => _entityMap[key];
@@ -288,8 +323,8 @@ class ProductsForPageSearchResponse extends ProductsForPageSearchParams {
   ProductsForPageSearchResponse.fromMap(Map<String, dynamic> map) {
     entityMap = map;
     List<Product> products = new List<Product>();
-    for (Map prod in map["Products"]) {
-      products.add(new Product.fromMap(prod));
+    for (Map product in map["Products"]) {
+      products.add(new Product.fromMap(product));
     }
 
     entityMap["Products"] = products;
