@@ -16,3 +16,6 @@ doc/api/
 /.idea/
 /.dart_tool/
 .idea/
+
+*.css
+*.css.map
