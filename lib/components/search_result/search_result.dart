@@ -27,7 +27,7 @@ class SearchResultComponent extends OnChanges {
           .then((List<Column> columns) => this.columns = columns);
 
       prepareRows(changeRecord['products'].currentValue)
-          .then((List<Row> rows) => this.rows);
+          .then((List<Row> rows) => this.rows = rows);
     }
   }
 
@@ -74,7 +74,10 @@ class SearchResultComponent extends OnChanges {
       List<Cell> cells = new List<Cell>();
 
       Cell cellOfProductName = new Cell(
-          uid: product.uid, field: "productName", value: product.productName);
+          uid: product.uid,
+          field: "productName",
+          value: product.productName,
+          rowId: product.uid);
 
       cells.add(cellOfProductName);
 
@@ -83,7 +86,7 @@ class SearchResultComponent extends OnChanges {
             uid: price.uid,
             rowId: product.uid,
             field: price.belongsToCompany.first.companyName,
-            value: price.priceValue);
+            value: price.priceValue.toString());
         cells.add(cell);
       }
 

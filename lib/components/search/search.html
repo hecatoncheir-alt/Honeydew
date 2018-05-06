@@ -43,8 +43,8 @@
     </div>
   </div>
 
-
-  <div class="search-result">
+  <div class="search-result"
+       *ngIf="productsForPageSearchResponse.TotalProductsFound != null && productsForPageSearchResponse.TotalProductsFound != 0">
     <search-result [products]="productsForPageSearchResponse.Products"></search-result>
   </div>
 

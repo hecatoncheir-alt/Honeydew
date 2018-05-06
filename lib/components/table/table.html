@@ -12,8 +12,8 @@
     <div class="table__row" *ngFor="let row of rows; trackBy: rowTrack"
          [attr.uid]="row.uid">
 
-      <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
-        <template ngFor let-cell [ngForOf]="row.cells">
+      <template ngFor let-cell [ngForOf]="row.cells">
+        <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
           <template [ngIf]="column.field == cell.field">
             <div class="row__column">
               <div class="row__cell">{{cell.value}}</div>

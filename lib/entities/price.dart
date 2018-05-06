@@ -9,8 +9,8 @@ class Price extends MapBase {
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
 
-  String get priceValue => this['priceValue'];
-  set priceValue(String value) => this['priceValue'] = value;
+  int get priceValue => this['priceValue'];
+  set priceValue(int value) => this['priceValue'] = value;
 
   //TODO
 //  String get priceDateTime => this['priceDateTime'];

@@ -158,7 +158,7 @@ class SocketService {
       iterator--;
       // Используется таймер
       new Timer(new Duration(seconds: 1), () {
-        if (socket.readyState == 1) {
+        if (socket != null && socket.readyState == 1) {
           eventData.APIVersion = configurationService.config.apiVersion;
 
           /// Событие необходимо добавить в общий пул событий.

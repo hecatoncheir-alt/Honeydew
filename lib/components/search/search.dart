@@ -19,7 +19,7 @@ import 'src/entities.dart'
     selector: 'search',
     templateUrl: 'search.html',
     styleUrls: ["search.css"],
-    directives: const [SearchResultComponent])
+    directives: const [NgIf, SearchResultComponent])
 class SearchComponent implements OnActivate, OnInit, OnDestroy {
   Router router;
 
