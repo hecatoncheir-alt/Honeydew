@@ -54,11 +54,14 @@ class SearchResultComponent extends OnChanges {
 
   Future<List<Company>> prepareCompaniesOfProducts(
       List<Product> products) async {
+    List<String> companiesUids = new List<String>();
+
     List<Company> companiesOfProductsPrices = new List<Company>();
     for (Product product in products) {
       for (Price price in product.hasPrice) {
         for (Company company in price.belongsToCompany) {
-          if (companiesOfProductsPrices.contains(company)) continue;
+          if (companiesUids.contains(company.uid)) continue;
+          companiesUids.add(company.uid);
           companiesOfProductsPrices.add(company);
         }
       }

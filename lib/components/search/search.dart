@@ -87,6 +87,8 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
     if (productsForPageSearchParams.CurrentPage != null &&
         productsForPageSearchParams.SearchedName != null)
       this.searchProducts(this.productsForPageSearchParams);
+
+    searchField.focus();
   }
 
   Future<void> searchProducts(ProductsForPageSearchParams params) async {
