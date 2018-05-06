@@ -2,7 +2,7 @@ library table;
 
 import 'package:angular/angular.dart';
 
-import 'package:honeydew/entities.dart' show Column, Row;
+import 'package:honeydew/entities.dart' show Column, Row, Cell;
 
 @Component(
     selector: 'table',
@@ -25,6 +25,12 @@ class Table extends OnChanges {
 //
 //    if (changeRecord["rows"].previousValue !=
 //        changeRecord["rows"].currentValue) {}
+  }
+
+  List<Cell> getCellOfRowColumn(Row row, Column column) {
+    return row.cells
+        .where((Cell cell) => cell.field == column.field)
+        .toList();
   }
 
   Column columnTrack(int index, dynamic item) {

@@ -41,8 +41,10 @@ class Product extends MapBase {
     this._entityMap = map;
 
     List<Price> prices = new List<Price>();
-    for (Map price in map["has_price"]) {
-      prices.add(new Price.fromMap(price));
+    if (map["has_price"] != null) {
+      for (Map price in map["has_price"]) {
+        prices.add(new Price.fromMap(price));
+      }
     }
 
     _entityMap["has_price"] = prices;

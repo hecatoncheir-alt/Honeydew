@@ -17,11 +17,16 @@ class Cell extends MapBase {
   String get rowId => this['rowId'];
   set rowId(String value) => this['rowId'] = value;
 
-  Cell({String uid, String value, String field, String rowId}) {
+  String get columnId => this['columnId'];
+  set columnId(String value) => this['columnId'] = value;
+
+  Cell(
+      {String uid, String value, String field, String rowId, String columnId}) {
     this
       ..uid = uid
       ..value = value
       ..field = field
+      ..columnId = columnId
       ..rowId = rowId;
   }
 

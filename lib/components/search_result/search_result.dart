@@ -88,6 +88,7 @@ class SearchResultComponent extends OnChanges {
         Cell cell = new Cell(
             uid: price.uid,
             rowId: product.uid,
+            columnId: price.belongsToCompany.first.uid,
             field: price.belongsToCompany.first.companyName,
             value: price.priceValue.toString());
         cells.add(cell);
