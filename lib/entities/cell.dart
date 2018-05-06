@@ -1,27 +1,31 @@
-library column_entity;
+library cell_entity;
 
 import 'dart:collection';
 
-class Column extends MapBase {
+class Cell extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
 
-  String get title => this['title'];
-  set title(String value) => this['title'] = value;
+  String get value => this['value'];
+  set value(String value) => this['value'] = value;
 
   String get field => this['field'];
   set field(String value) => this['field'] = value;
 
-  Column({String uid, String title, String field}) {
+  String get rowId => this['rowId'];
+  set rowId(String value) => this['rowId'] = value;
+
+  Cell({String uid, String value, String field, String rowId}) {
     this
       ..uid = uid
-      ..title = title
-      ..field = field;
+      ..value = value
+      ..field = field
+      ..rowId = rowId;
   }
 
-  Column.fromMap(Map map) {
+  Cell.fromMap(Map map) {
     this._entityMap = map;
   }
 

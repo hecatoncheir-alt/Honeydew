@@ -1,7 +1,7 @@
 library product_enntity;
 
 import 'dart:collection';
-import 'package:honeydew/entities.dart' show Price;
+import 'price.dart';
 
 class Product extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();

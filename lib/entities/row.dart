@@ -1,9 +1,22 @@
 library row_entity;
 
 import 'dart:collection';
+import 'cell.dart';
 
 class Row extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
+
+  String get uid => this['uid'];
+  set uid(String value) => this['uid'] = value;
+
+  List<Cell> get cells => this['cells'];
+  set cells(List<Cell> value) => this['cells'] = value;
+
+  Row({String uid, List<Cell> cells}) {
+    this
+      ..uid = uid
+      ..cells = cells;
+  }
 
   Row.fromMap(Map map) {
     this._entityMap = map;

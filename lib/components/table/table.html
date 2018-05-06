@@ -1,0 +1,27 @@
+<section class="table">
+  <header class="table__header">
+    <div class="table__row table__row--header">
+      <div class="row__column" *ngFor="let column of columns; trackBy: columnTrack"
+           [attr.uid]="column.uid">
+        <div class="row__cell row__cell--header">{{column.title}}</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="table__body" [style.height]="height">
+    <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
+      <div class="table__row" *ngFor="let row of rows; trackBy: rowTrack"
+           [attr.uid]="row.uid">
+
+        <template ngFor let-cell [ngForOf]="row.cells">
+          <template [ngIf]="column.field == cell.field">
+            <div class="row__column">
+              <div class="row__cell">{{cell.value}}</div>
+            </div>
+          </template>
+        </template>
+
+      </div>
+    </template>
+  </div>
+</section>
