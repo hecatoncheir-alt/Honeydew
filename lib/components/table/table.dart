@@ -9,7 +9,7 @@ import 'package:honeydew/entities.dart' show Column, Row, Cell;
     templateUrl: 'table.html',
     styleUrls: ["table.css"],
     directives: const [NgFor, NgIf])
-class Table extends OnChanges {
+class Table {
   @Input()
   List<Column> columns;
 
@@ -19,18 +19,8 @@ class Table extends OnChanges {
   @Input()
   String height;
 
-  void ngOnChanges(Map<String, SimpleChange> changeRecord) {
-//    if (changeRecord["columns"].previousValue !=
-//        changeRecord["columns"].currentValue) {}
-//
-//    if (changeRecord["rows"].previousValue !=
-//        changeRecord["rows"].currentValue) {}
-  }
-
   List<Cell> getCellOfRowColumn(Row row, Column column) {
-    return row.cells
-        .where((Cell cell) => cell.field == column.field)
-        .toList();
+    return row.cells.where((Cell cell) => cell.field == column.field).toList();
   }
 
   Column columnTrack(int index, dynamic item) {
