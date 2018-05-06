@@ -9,10 +9,10 @@
   </header>
 
   <div class="table__body" [style.height]="height">
-    <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
-      <div class="table__row" *ngFor="let row of rows; trackBy: rowTrack"
-           [attr.uid]="row.uid">
+    <div class="table__row" *ngFor="let row of rows; trackBy: rowTrack"
+         [attr.uid]="row.uid">
 
+      <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
         <template ngFor let-cell [ngForOf]="row.cells">
           <template [ngIf]="column.field == cell.field">
             <div class="row__column">
@@ -20,8 +20,8 @@
             </div>
           </template>
         </template>
+      </template>
 
-      </div>
-    </template>
+    </div>
   </div>
 </section>
