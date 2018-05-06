@@ -88,7 +88,7 @@ class SocketService {
           /// После подключения к серверу, если есть не отправленные события
           /// их нужно отправить.
           if (eventPool.isNotEmpty) {
-            for (String eventData in eventPool) {
+            for (EventData eventData in eventPool) {
               socketConnection.send(eventData);
             }
           }

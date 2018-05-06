@@ -91,23 +91,13 @@
 
 
 
-// .search-result {
-//   margin-right: 3%;
+ .search-result {
+   margin-right: 3%;
 
-//   border: 1px solid #54b30f;
+   border: 1px solid #54b30f;
 
-//   display: flex;
-//   align-items: center;
+   display: flex;
+   align-items: center;
 
-//   grid-area: search-result;
-
-//   .table {
-//     min-width: 100%;
-//   }
-
-//   .table__body {
-//     height: 70vh;
-
-//     overflow-y: scroll;
-//   }
-// }
+   grid-area: search-result;
+ }
