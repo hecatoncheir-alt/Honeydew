@@ -74,7 +74,7 @@ class SearchResultComponent extends OnChanges {
     List<Row> rows = new List<Row>();
 
     for (Product product in products) {
-      List<Cell> cells = new List<Cell>();
+      Map<String,Cell> cells = new Map<String,Cell>();
 
       Cell cellOfProductName = new Cell(
           uid: product.uid,
@@ -82,7 +82,7 @@ class SearchResultComponent extends OnChanges {
           value: product.productName,
           rowId: product.uid);
 
-      cells.add(cellOfProductName);
+      cells[cellOfProductName.field] = cellOfProductName;
 
       for (Price price in product.hasPrice) {
         Cell cell = new Cell(
@@ -91,7 +91,7 @@ class SearchResultComponent extends OnChanges {
             columnId: price.belongsToCompany.first.uid,
             field: price.belongsToCompany.first.companyName,
             value: price.priceValue.toString());
-        cells.add(cell);
+        cells[cell.field] = cell;
       }
 
       Row row = new Row(uid: product.uid, cells: cells);

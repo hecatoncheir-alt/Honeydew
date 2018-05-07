@@ -9,10 +9,10 @@ class Row extends MapBase {
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
 
-  List<Cell> get cells => this['cells'];
-  set cells(List<Cell> value) => this['cells'] = value;
+  Map<String, Cell> get cells => this['cells'];
+  set cells(Map<String,Cell> value) => this['cells'] = value;
 
-  Row({String uid, List<Cell> cells}) {
+  Row({String uid,Map<String, Cell> cells}) {
     this
       ..uid = uid
       ..cells = cells;

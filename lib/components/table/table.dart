@@ -20,7 +20,7 @@ class Table {
   String height;
 
   List<Cell> getCellOfRowColumn(Row row, Column column) {
-    return row.cells.where((Cell cell) => cell.field == column.field).toList();
+//    return row.cells.where((Cell cell) => cell.field == column.field).toList();
   }
 
   Column columnTrack(int index, dynamic item) {
