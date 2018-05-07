@@ -2,7 +2,7 @@ library table;
 
 import 'package:angular/angular.dart';
 
-import 'package:honeydew/entities.dart' show Column, Row, Cell;
+import 'package:honeydew/entities.dart' show Column, Row;
 
 @Component(
     selector: 'table',
