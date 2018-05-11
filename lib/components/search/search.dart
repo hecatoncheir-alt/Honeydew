@@ -16,6 +16,8 @@ import 'package:honeydew/services/routes/paths.dart' as paths;
 import 'package:honeydew/entities.dart'
     show ProductsForPageSearchParams, ProductsForPageSearchResponse;
 
+bool _isAlreadyOpened = false;
+
 @Component(
     selector: 'search',
     templateUrl: 'search.html',
@@ -34,6 +36,8 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   @ViewChild('searchField')
   InputElement searchField;
+
+  bool get isAlreadyOpened => _isAlreadyOpened;
 
   SearchComponent(this.socket, this.router)
       : productsForPageSearchParams = new ProductsForPageSearchParams()
@@ -71,6 +75,8 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   @override
   void onActivate(_, RouterState newRouterState) {
+    new Future.delayed(new Duration(seconds: 1), () => _isAlreadyOpened = true);
+
     productsForPageSearchParams.SearchedName =
         newRouterState.parameters["text"];
 

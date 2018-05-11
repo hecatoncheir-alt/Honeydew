@@ -1,6 +1,6 @@
 <section class="template-area">
 
-  <div class="information">
+  <div class="information" [class.anim]="!isAlreadyOpened">
     <header class="information__header">
       <span class="logotype"><span class="mark--info">Honey</span>dew</span>
     </header>
@@ -9,7 +9,7 @@
     </nav>
   </div>
 
-  <div class="search-form">
+  <div class="search-form" [class.anim]="!isAlreadyOpened">
     <div class="search__form search-area__block">
       <div class="input">
         <label for="input"
