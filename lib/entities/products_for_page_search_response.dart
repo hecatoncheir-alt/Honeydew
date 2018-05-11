@@ -10,16 +10,15 @@ class ProductsForPageSearchResponse extends ProductsForPageSearchParams {
   ProductsForPageSearchResponse(
       {String SearchedName,
       int CurrentPage,
-      int CountProductsOnPage,
       int TotalProductsFound,
-      int TotalProductsOnOnePage}) {
+      int TotalProductsForOnePage}) {
     super.SearchedName = SearchedName;
     super.CurrentPage = CurrentPage;
-    super.CountProductsOnPage = CountProductsOnPage;
+    super.TotalProductsForOnePage = TotalProductsForOnePage;
 
     this
       ..TotalProductsFound = TotalProductsFound
-      ..TotalProductsOnOnePage = TotalProductsOnOnePage
+      ..TotalProductsForOnePage = TotalProductsForOnePage
       ..Products = new List<Product>();
   }
 
@@ -33,9 +32,9 @@ class ProductsForPageSearchResponse extends ProductsForPageSearchParams {
     entityMap["Products"] = products;
   }
 
-  int get TotalProductsOnOnePage => this['TotalProductsOnOnePage'];
-  set TotalProductsOnOnePage(int value) =>
-      this['TotalProductsOnOnePage'] = value;
+  int get TotalProductsForOnePage => this['TotalProductsForOnePage'];
+  set TotalProductsForOnePage(int value) =>
+      this['TotalProductsForOnePage'] = value;
 
   int get TotalProductsFound => this['TotalProductsFound'];
   set TotalProductsFound(int value) => this['TotalProductsFound'] = value;

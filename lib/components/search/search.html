@@ -45,7 +45,7 @@
 
   <div class="search-result"
        *ngIf="productsForPageSearchResponse.TotalProductsFound != null && productsForPageSearchResponse.TotalProductsFound != 0">
-    <search-result [products]="productsForPageSearchResponse.Products"></search-result>
+    <search-result [searchResponse]="productsForPageSearchResponse"></search-result>
   </div>
 
 </section>

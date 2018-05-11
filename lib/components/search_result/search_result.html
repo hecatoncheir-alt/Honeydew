@@ -1,1 +1,6 @@
 <table [columns]="columns" [rows]="rows" [height]="'70vh'"></table>
+
+<pagination (selectedPage)="pageSelected($event)"
+            [currentPage]="searchResponse.CurrentPage"
+            [itemsPerPage]="searchResponse.TotalProductsForOnePage"
+            [totalItems]="searchResponse.Products.length"></pagination>

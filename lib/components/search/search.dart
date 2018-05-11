@@ -12,8 +12,8 @@ import 'package:honeydew/components.dart' show SearchResultComponent;
 import 'package:honeydew/services.dart' show SocketService, EventData;
 import 'package:honeydew/services/routes/paths.dart' as paths;
 
-import 'src/entities.dart'
-    show ProductsForPageSearchResponse, ProductsForPageSearchParams;
+import 'package:honeydew/entities.dart'
+    show ProductsForPageSearchParams, ProductsForPageSearchResponse;
 
 @Component(
     selector: 'search',
@@ -34,7 +34,7 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   SearchComponent(this.socket, this.router)
       : productsForPageSearchParams = new ProductsForPageSearchParams()
-          ..CountProductsOnPage = 10
+          ..TotalProductsForOnePage = 10
           ..Language = "ru",
         productsForPageSearchResponse = new ProductsForPageSearchResponse();
 
@@ -59,14 +59,10 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
   }
 
   @override
-  void ngOnInit() {
-    this.subscribeOnEvents(socket.data);
-  }
+  void ngOnInit() => this.subscribeOnEvents(socket.data);
 
   @override
-  void ngOnDestroy() {
-    this.subscription.cancel();
-  }
+  void ngOnDestroy() => this.subscription.cancel();
 
   @override
   void onActivate(_, RouterState newRouterState) {

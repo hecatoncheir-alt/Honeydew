@@ -1,4 +1,4 @@
-library price_enntity;
+library price_entity;
 
 import 'dart:collection';
 import 'company.dart';

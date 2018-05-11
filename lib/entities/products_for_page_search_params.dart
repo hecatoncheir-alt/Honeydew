@@ -14,14 +14,14 @@ class ProductsForPageSearchParams extends MapBase {
   int get CurrentPage => this['CurrentPage'];
   set CurrentPage(int value) => this['CurrentPage'] = value;
 
-  int get CountProductsOnPage => this['CountProductsOnPage'];
-  set CountProductsOnPage(int value) => this['CountProductsOnPage'] = value;
+  int get TotalProductsForOnePage => this['TotalProductsForOnePage'];
+  set TotalProductsForOnePage(int value) => this['TotalProductsForOnePage'] = value;
 
   ProductsForPageSearchParams(
-      {String SearchedName, int CurrentPage, int CountProductsOnPage}) {
+      {String SearchedName, int CurrentPage, int TotalProductsForOnePage}) {
     this["SearchedName"] = SearchedName;
     this["CurrentPage"] = CurrentPage;
-    this["CountProductsOnPage"] = CountProductsOnPage;
+    this["TotalProductsForOnePage"] = TotalProductsForOnePage;
   }
 
   operator [](Object key) => entityMap[key];

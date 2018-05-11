@@ -5,31 +5,44 @@ import 'dart:async';
 import 'package:uuid/uuid.dart';
 import 'package:angular/angular.dart';
 
-import 'package:honeydew/components.dart' show Table;
+import 'package:honeydew/components.dart'
+    show TableComponent, PaginationComponent;
+
 import 'package:honeydew/entities.dart'
-    show Product, Company, Price, Column, Row, Cell;
+    show
+        Product,
+        Company,
+        Price,
+        Column,
+        Row,
+        Cell,
+        ProductsForPageSearchResponse;
 
 @Component(
     selector: 'search-result',
     templateUrl: 'search_result.html',
-    directives: const [Table])
-class SearchResultComponent extends OnChanges {
+    directives: const [TableComponent, PaginationComponent])
+class SearchResultComponent {
+  ProductsForPageSearchResponse _searchResponse;
+  ProductsForPageSearchResponse get searchResponse => _searchResponse;
+
   @Input()
-  List<Product> products;
+  set searchResponse(ProductsForPageSearchResponse searchResponse) {
+    this._searchResponse = searchResponse;
+
+    prepareColumns(searchResponse.Products)
+        .then((List<Column> columns) => this.columns = columns);
+
+    prepareRows(searchResponse.Products)
+        .then((List<Row> rows) => this.rows = rows);
+  }
+
+  void pageSelected(int currentSelectedPageNumber) {
+    print(currentSelectedPageNumber);
+  }
 
   List<Column> columns;
   List<Row> rows;
-
-  void ngOnChanges(Map<String, SimpleChange> changeRecord) {
-    if (changeRecord["products"].previousValue !=
-        changeRecord["products"].currentValue) {
-      prepareColumns(changeRecord["products"].currentValue)
-          .then((List<Column> columns) => this.columns = columns);
-
-      prepareRows(changeRecord['products'].currentValue)
-          .then((List<Row> rows) => this.rows = rows);
-    }
-  }
 
   Future<List<Column>> prepareColumns(List<Product> products) async {
     return prepareCompaniesOfProducts(products).then((List<Company> companies) {
@@ -74,7 +87,7 @@ class SearchResultComponent extends OnChanges {
     List<Row> rows = new List<Row>();
 
     for (Product product in products) {
-      Map<String,Cell> cells = new Map<String,Cell>();
+      Map<String, Cell> cells = new Map<String, Cell>();
 
       Cell cellOfProductName = new Cell(
           uid: product.uid,
