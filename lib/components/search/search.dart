@@ -108,6 +108,8 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
   }
 
   void search(ProductsForPageSearchParams params) {
+    if (params.SearchedName.isEmpty) this.router.navigate(paths.search.toUrl());
+
     if (params.CurrentPage == null) {
       this.router.navigate(paths.searchWithPageParams
           .toUrl(parameters: {"text": params.SearchedName, "page": "1"}));
