@@ -7,7 +7,7 @@ import 'package:honeydew/entities.dart' show Column, Row;
 @Component(
     selector: 'table',
     templateUrl: 'table.html',
-    styleUrls: ["table.css"],
+    styleUrls: const ["table.css"],
     directives: const [NgFor, NgIf])
 class TableComponent {
   @Input()

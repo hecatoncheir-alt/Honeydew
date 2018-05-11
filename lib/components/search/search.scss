@@ -1,5 +1,4 @@
 @import "../../stylesheets/buttons";
-@import "../../stylesheets/ui";
 
 .template-area {
   height: 100vh;
@@ -89,15 +88,45 @@
   }
 }
 
+.counter {
+  display: grid;
+  align-items: center;
 
+  grid-template-columns: 1fr auto;
 
- .search-result {
-   margin-right: 3%;
+  .counter__label {
+    font-family: 'IBM Plex Mono';
+    font-size: 0.8em;
+    font-style: italic;
+    font-weight: 500;
 
-   border: 1px solid #54b30f;
+    color: #152849;
+    text-transform: uppercase;
+  }
 
-   display: flex;
-   align-items: center;
+  .count {
+    margin-right: 26%;
+    padding-left: 16%;
 
-   grid-area: search-result;
- }
+    font-size: 2em;
+
+    text-align: right;
+    color: #54b30f;
+  }
+}
+
+.details-block {
+  margin: 16px 0;
+}
+
+.search-result {
+  margin-right: 3%;
+  padding: 3%;
+
+  border: 1px solid #54b30f;
+
+  display: flex;
+  align-items: center;
+
+  grid-area: search-result;
+}

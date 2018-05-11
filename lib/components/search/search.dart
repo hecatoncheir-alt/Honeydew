@@ -18,7 +18,7 @@ import 'package:honeydew/entities.dart'
 @Component(
     selector: 'search',
     templateUrl: 'search.html',
-    styleUrls: ["search.css"],
+    styleUrls: const ["search.css"],
     directives: const [NgIf, SearchResultComponent])
 class SearchComponent implements OnActivate, OnInit, OnDestroy {
   Router router;
@@ -34,7 +34,7 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
 
   SearchComponent(this.socket, this.router)
       : productsForPageSearchParams = new ProductsForPageSearchParams()
-          ..TotalProductsForOnePage = 10
+          ..TotalProductsForOnePage = 1
           ..Language = "ru",
         productsForPageSearchResponse = new ProductsForPageSearchResponse();
 

@@ -4,6 +4,9 @@ import 'dart:async';
 
 import 'package:uuid/uuid.dart';
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
+
+import 'package:honeydew/services/routes/paths.dart' as paths;
 
 import 'package:honeydew/components.dart'
     show TableComponent, PaginationComponent;
@@ -23,6 +26,10 @@ import 'package:honeydew/entities.dart'
     templateUrl: 'search_result.html',
     directives: const [TableComponent, PaginationComponent])
 class SearchResultComponent {
+  Router router;
+
+  SearchResultComponent(this.router);
+
   ProductsForPageSearchResponse _searchResponse;
   ProductsForPageSearchResponse get searchResponse => _searchResponse;
 
@@ -38,7 +45,10 @@ class SearchResultComponent {
   }
 
   void pageSelected(int currentSelectedPageNumber) {
-    print(currentSelectedPageNumber);
+    this.router.navigate(paths.searchWithPageParams.toUrl(parameters: {
+          "text": searchResponse.SearchedName,
+          "page": "$currentSelectedPageNumber"
+        }));
   }
 
   List<Column> columns;

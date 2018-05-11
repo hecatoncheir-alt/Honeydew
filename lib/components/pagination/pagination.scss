@@ -1,0 +1,32 @@
+.pagination {
+  padding: 3% 0;
+
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .page--active {
+    font-size: 1.3em;
+
+    color: #55aa26;
+  }
+
+  .page {
+    justify-content: center;
+
+    flex-direction: row;
+
+    cursor: pointer;
+
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &:hover {
+      color: #54b30f;
+    }
+  }
+}

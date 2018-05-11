@@ -1,9 +1,84 @@
-@import "../../stylesheets/ui";
-
 .table {
   min-width: 100%;
 }
 
 .table__body {
   overflow-y: scroll;
+}
+
+.table {
+  padding-bottom: 0;
+
+  .table__header {
+    margin-bottom: 20px;
+
+    .table__row {
+      border-bottom: none 0;
+    }
+
+    .table__row--header {
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .row__column {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:first-child {
+        justify-content: left;
+      }
+
+      .row__cell--header {
+        font-family: 'IBM Plex Mono' !important;
+        font-style: normal;
+        font-weight: 700;
+
+        color: #55aa26;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .table__row {
+    padding: 10px 0;
+
+    border-bottom: 1px solid #d1e1c9;
+
+    transition: all 100ms ease-in-out;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    grid-column-gap: 10px;
+    grid-template-columns: 3fr repeat(3, 1fr);
+
+    &:nth-child(even) {
+      background-color: #f4f7eb;
+    }
+
+    &:hover {
+      background-color: #deecb4;
+      border-bottom-color: #fff;
+    }
+
+    .row__column {
+      padding: 3px;
+
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+      }
+
+      .row__cell {
+        font-family: 'IBM Plex Sans';
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+  }
 }

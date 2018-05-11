@@ -1,1 +1,37 @@
-pagination
+<section class="pagination">
+  <span class="page" (click)="selectPage(1)">В начало</span>
+
+  <span class="page"
+        *ngIf="currentPage-1!=0"
+        (click)="selectPage(currentPage-1)">
+           <i class="material-icons">keyboard_arrow_left</i>
+  </span>
+  <span class="page"
+        style="opacity: .3;"
+        *ngIf="currentPage-1==0">
+           <i class="material-icons">keyboard_arrow_left</i>
+  </span>
+
+  <nav class="pages">
+    <span class="page"
+          (click)="selectPage(currentPage-1)"
+          [hidden]="currentPage-1==0">{{currentPage-1}}</span>
+    <span class="page page--active">{{currentPage}}</span>
+    <span class="page"
+          (click)="selectPage(currentPage+1)"
+          [hidden]="currentPage==totalPages">{{currentPage+1}}</span>
+  </nav>
+
+  <span class="page"
+        *ngIf="currentPage!=totalPages"
+        (click)="selectPage(currentPage+1)">
+          <i class="material-icons">keyboard_arrow_right</i>
+  </span>
+  <span class="page"
+        style="opacity: .3;"
+        *ngIf="currentPage==totalPages">
+          <i class="material-icons">keyboard_arrow_right</i>
+  </span>
+
+  <span class="page" (click)="selectPage(totalPages)">В конец(<span class="mark--info">{{totalPages}}</span>)</span>
+</section>
