@@ -48,4 +48,10 @@
     <search-result [searchResponse]="productsForPageSearchResponse"></search-result>
   </div>
 
+  <div class="search-result" *ngIf="searchInProgress">
+    <div class="preloader">
+      <preloader></preloader>
+    </div>
+  </div>
+
 </section>

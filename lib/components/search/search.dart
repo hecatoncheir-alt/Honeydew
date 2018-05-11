@@ -7,7 +7,8 @@ import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import 'package:honeydew/components.dart' show SearchResultComponent;
+import 'package:honeydew/components.dart'
+    show SearchResultComponent, PreloaderComponent;
 
 import 'package:honeydew/services.dart' show SocketService, EventData;
 import 'package:honeydew/services/routes/paths.dart' as paths;
@@ -19,7 +20,7 @@ import 'package:honeydew/entities.dart'
     selector: 'search',
     templateUrl: 'search.html',
     styleUrls: const ["search.css"],
-    directives: const [NgIf, SearchResultComponent])
+    directives: const [NgIf, SearchResultComponent, PreloaderComponent])
 class SearchComponent implements OnActivate, OnInit, OnDestroy {
   Router router;
 
@@ -29,12 +30,14 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
   ProductsForPageSearchParams productsForPageSearchParams;
   ProductsForPageSearchResponse productsForPageSearchResponse;
 
+  static int totalProductsForOnePageCount = 1;
+
   @ViewChild('searchField')
   InputElement searchField;
 
   SearchComponent(this.socket, this.router)
       : productsForPageSearchParams = new ProductsForPageSearchParams()
-          ..TotalProductsForOnePage = 1
+          ..TotalProductsForOnePage = totalProductsForOnePageCount
           ..Language = "ru",
         productsForPageSearchResponse = new ProductsForPageSearchResponse();
 
@@ -45,6 +48,7 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
           this.productsForPageSearchResponse =
               new ProductsForPageSearchResponse.fromMap(
                   json.decode(event.data));
+          this.searchInProgress = false;
           searchField.focus();
           break;
 
@@ -52,6 +56,7 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
           this.productsForPageSearchResponse =
               new ProductsForPageSearchResponse.fromMap(
                   json.decode(event.data));
+          this.searchInProgress = false;
           searchField.focus();
           break;
       }
@@ -87,9 +92,12 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
     searchField.focus();
   }
 
+  bool searchInProgress = false;
+
   Future<void> searchProducts(ProductsForPageSearchParams params) async {
     String encodedParams = json.encode(params);
     EventData message = new EventData("Need items by name", encodedParams);
+    this.searchInProgress = true;
     socket.write(message);
   }
 

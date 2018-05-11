@@ -3,3 +3,4 @@ export 'components/search/search.dart';
 export 'components/search_result/search_result.dart';
 export 'components/table/table.dart';
 export 'components/pagination/pagination.dart';
+export 'components/preloader/preloader.dart';
