@@ -107,6 +107,8 @@ class SearchResultComponent {
 
       cells[cellOfProductName.field] = cellOfProductName;
 
+      ///TODO: Может быть несколько цен(по датам) для одной компании
+
       for (Price price in product.hasPrice) {
         Cell cell = new Cell(
             uid: price.uid,
