@@ -143,7 +143,7 @@ class SocketService {
 
   /// Метод который подписывается на stream событий от сервера
   Future<Null> subscribeToEvents(Stream eventChannel) async {
-    eventChannel.listen((dynamic event) {
+    eventChannel.listen((event) {
       _decodeSocketData(event).then(_finalizeData);
     });
   }
@@ -212,11 +212,10 @@ class SocketService {
   /// Метод может разобрать как строку так и событие которое
   /// содержит в себе строку. Это делает метод более универсальным,
   /// и позволяет проще реализовать Mock сервиса.
-  Future<EventData> _decodeSocketData(event) async {
+  Future<EventData> _decodeSocketData(MessageEvent event) async {
     Map<String, dynamic> details;
 
-    if (event is String) details = json.decode(event);
-    if (event is MessageEvent) details = json.decode(event.data);
+    details = json.decode(event.data);
 
     if (details["APIVersion"] != configurationService.config.apiVersion)
       return null;
