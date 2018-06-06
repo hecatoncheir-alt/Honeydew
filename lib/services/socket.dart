@@ -51,7 +51,7 @@ class SocketService {
   /// с сервером в случаи разрыва или нет.
   bool reconnectionInProgress = false;
 
-  StreamController dataControl = new StreamController();
+  StreamController<EventData> dataControl = new StreamController<EventData>();
 
   Stream<EventData> data;
 

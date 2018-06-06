@@ -4,13 +4,13 @@ environment:
   sdk: '>=2.0.0-dev.44.0 <2.0.0'
 
 dependencies:
-  angular: ^5.0.0-alpha+11
-  angular_router: ^2.0.0-alpha+11
-  yaml: ^2.1.13
+  angular: ^5.0.0-alpha+14
+  angular_router: ^2.0.0-alpha+13
+  yaml: ^2.1.14
   uuid: ^1.0.0
 
 dev_dependencies:
-  angular_test: ^2.0.0-alpha+9
-  build_runner: ^0.8.5
-  build_web_compilers: ^0.3.7+3
-  sass_builder: ^1.2.0
+  angular_test: ^2.0.0-alpha+12
+  build_runner: ^0.8.9
+  build_web_compilers: ^0.4.0+3
+  sass_builder: ^2.0.0
