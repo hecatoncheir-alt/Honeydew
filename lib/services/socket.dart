@@ -1,44 +1,13 @@
 library socket_service;
 
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:honeydew/services.dart' show ConfigurationService;
 
-class EventData extends MapBase {
-  Map<String, dynamic> _entityMap = new Map<String, dynamic>();
-
-  String get message => this['Message'];
-
-  set message(String value) => this['Message'] = value;
-
-  String get data => this['Data'];
-
-  set data(String value) => this['Data'] = value;
-
-  String get APIVersion => this['APIVersion'];
-
-  set APIVersion(String value) => this['APIVersion'] = value;
-
-  EventData(String message, [String data, String apiVersion]) {
-    this["Message"] = message;
-    this["Data"] = data;
-    this["APIVersion"] = apiVersion;
-  }
-
-  operator [](Object key) => _entityMap[key];
-
-  operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
-
-  get keys => _entityMap.keys;
-
-  remove(key) => _entityMap.remove(key);
-
-  clear() => _entityMap.clear();
-}
+import 'package:honeydew/entities.dart' show EventData;
 
 @Injectable()
 class SocketService {

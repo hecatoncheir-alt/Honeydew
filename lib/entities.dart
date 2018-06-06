@@ -6,3 +6,4 @@ export 'entities/row.dart';
 export 'entities/cell.dart';
 export 'entities/products_for_page_search_params.dart';
 export 'entities/products_for_page_search_response.dart';
+export 'entities/event_data.dart';

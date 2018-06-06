@@ -10,7 +10,8 @@ import 'package:angular_router/angular_router.dart';
 import 'package:honeydew/components.dart'
     show SearchResultComponent, PreloaderComponent;
 
-import 'package:honeydew/services.dart' show SocketService, EventData;
+import 'package:honeydew/services.dart' show SocketService;
+import 'package:honeydew/entities.dart' show EventData;
 import 'package:honeydew/services/routes/paths.dart' as paths;
 
 import 'package:honeydew/entities.dart'
