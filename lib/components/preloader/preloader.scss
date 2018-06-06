@@ -16,7 +16,7 @@ $cards: (#dbe13c, #b6d334, #A7C433, #6D911F, #47754A, #192539);
   margin-left: - $cardWidth/2;
   height: $cardHeight;
   width: $cardWidth;
-  border-radius: $cardWidth/10;
+  border-radius: $cardWidth/6;
   transform-origin: center;
 
   @for $i from 1 through 6 {

@@ -62,7 +62,7 @@ class SocketService {
 
   /// Конструктор сервиса
   SocketService(this.configurationService) {
-    data = dataControl.stream.asBroadcastStream() as Stream<EventData>;
+    data = dataControl.stream.asBroadcastStream();
   }
 
   /// Подключение к серверу
