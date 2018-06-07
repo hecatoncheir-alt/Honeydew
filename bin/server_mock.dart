@@ -32,10 +32,33 @@ void main() {
           List<Map> products = <Map>[
             <String, dynamic>{
               "uid": "1",
-              "productName": "1",
+              "productName": "Test product",
               "productIri": "http://",
               "previewImageLink": "http://",
               "productIsActive": true,
+              "belongs_to_category": <Map>[
+                <String, dynamic>{
+                  "uid": "1",
+                  "categoryName": "Test category",
+                  "categoryIsActive": true,
+                  "belongs_to_company": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "companyName": "Test company",
+                      "companyIri": "http://",
+                      "companyIsActive": true,
+                    }
+                  ],
+                }
+              ],
+              "belongs_to_company": <Map>[
+                <String, dynamic>{
+                  "uid": "1",
+                  "companyName": "Test company",
+                  "companyIri": "http://",
+                  "companyIsActive": true,
+                }
+              ],
               "has_price": <Map>[
                 <String, dynamic>{
                   "uid": "1",

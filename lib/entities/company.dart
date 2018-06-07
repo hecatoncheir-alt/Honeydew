@@ -39,11 +39,13 @@ class Company extends MapBase {
     this._entityMap = map;
 
     List<Category> categories = new List<Category>();
-    for (Map category in map["has_category"]) {
-      categories.add(new Category.fromMap(category));
-    }
+    if (map["has_category"] != null) {
+      for (Map category in map["has_category"]) {
+        categories.add(new Category.fromMap(category));
+      }
 
-    this._entityMap["has_category"] = categories;
+      this._entityMap["has_category"] = categories;
+    }
   }
 
   operator [](Object key) => _entityMap[key];
