@@ -87,6 +87,64 @@ void main() {
                   ]
                 }
               ]
+            },
+            <String, dynamic>{
+              "uid": "2",
+              "productName": "Second test product",
+              "productIri": "http://",
+              "previewImageLink": "http://",
+              "productIsActive": true,
+              "belongs_to_category": <Map>[
+                <String, dynamic>{
+                  "uid": "1",
+                  "categoryName": "Test category",
+                  "categoryIsActive": true,
+                  "belongs_to_company": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "companyName": "Test company",
+                      "companyIri": "http://",
+                      "companyIsActive": true,
+                    }
+                  ],
+                }
+              ],
+              "belongs_to_company": <Map>[
+                <String, dynamic>{
+                  "uid": "1",
+                  "companyName": "Test company",
+                  "companyIri": "http://",
+                  "companyIsActive": true,
+                }
+              ],
+              "has_price": <Map>[
+                <String, dynamic>{
+                  "uid": "4",
+                  "priceValue": 4,
+                  "priceIsActive": true,
+                  "belongs_to_company": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "companyName": "Test company",
+                      "companyIri": "http://",
+                      "companyIsActive": true,
+                    }
+                  ]
+                },
+                <String, dynamic>{
+                  "uid": "5",
+                  "priceValue": 5,
+                  "priceIsActive": true,
+                  "belongs_to_company": <Map>[
+                    <String, dynamic>{
+                      "uid": "2",
+                      "companyName": "Second test company",
+                      "companyIri": "http://",
+                      "companyIsActive": true,
+                    }
+                  ]
+                }
+              ]
             }
           ];
 
