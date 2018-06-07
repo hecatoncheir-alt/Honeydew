@@ -1,7 +1,10 @@
-library product_enntity;
+library product_entity;
 
 import 'dart:collection';
+
 import 'price.dart';
+import 'company.dart';
+import 'category.dart';
 
 class Product extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -24,17 +27,31 @@ class Product extends MapBase {
   List<Price> get hasPrice => this['has_price'];
   set hasPrice(List<Price> value) => this['has_price'] = value;
 
+  List<Category> get belongsToCategory => this['belongs_to_category'];
+  set belongsToCategory(List<Category> value) =>
+      this['belongs_to_category'] = value;
+
+  List<Company> get belongsToCompany => this['belongs_to_company'];
+  set belongsToCompany(List<Company> value) =>
+      this['belongs_to_company'] = value;
+
   Product(
       {String uid,
       String productName,
       String productIri,
       String previewImageLink,
+      List<Price> hasPrice,
+      List<Company> belongsToCompany,
+      List<Category> belongsToCategory,
       bool productIsActive}) {
     this["uid"] = uid;
     this["productName"] = productName;
     this["productIri"] = productIri;
     this["previewImageLink"] = previewImageLink;
     this["productIsActive"] = productIsActive;
+    this
+      ..belongsToCategory = belongsToCategory
+      ..belongsToCompany = belongsToCompany;
   }
 
   Product.fromMap(Map map) {
@@ -48,6 +65,24 @@ class Product extends MapBase {
     }
 
     _entityMap["has_price"] = prices;
+
+    List<Company> companies = new List<Company>();
+    if (map["belongs_to_company"] != null) {
+      for (Map company in map["belongs_to_company"]) {
+        companies.add(new Company.fromMap(company));
+      }
+    }
+
+    _entityMap["belongs_to_company"] = companies;
+
+    List<Category> categories = new List<Category>();
+    if (map["belongs_to_category"] != null) {
+      for (Map category in map["belongs_to_category"]) {
+        categories.add(new Category.fromMap(category));
+      }
+    }
+
+    _entityMap["belongs_to_category"] = categories;
   }
 
   operator [](Object key) => _entityMap[key];
