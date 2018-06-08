@@ -15,7 +15,17 @@
       <template ngFor let-column [ngForOf]="columns" [ngForTrackBy]="columnTrack">
         <div class="row__column">
             <div *ngIf="row.cells[column.field]!=null"
-                 class="row__cell">{{row.cells[column.field].value}}</div>
+                 class="row__cell">
+                  <div>{{row.cells[column.field].value}}</div>
+                  <div *ngIf="columns.first == column">
+                    {{row.cells[column.field].details.category.name}}
+                  </div>
+
+                  <div *ngIf="columns.first != column &&
+                              row.cells[column.field].details != null">
+                    {{row.cells[column.field].details.city.name}}
+                  </div>
+            </div>
         </div>
       </template>
 

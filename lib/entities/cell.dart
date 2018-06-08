@@ -2,6 +2,9 @@ library cell_entity;
 
 import 'dart:collection';
 
+import 'category.dart';
+import 'city.dart';
+
 class Cell extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
@@ -20,14 +23,23 @@ class Cell extends MapBase {
   String get columnId => this['columnId'];
   set columnId(String value) => this['columnId'] = value;
 
+  CellDetails get details => this['details'];
+  set details(CellDetails value) => this['details'] = value;
+
   Cell(
-      {String uid, String value, String field, String rowId, String columnId}) {
+      {String uid,
+      String value,
+      String field,
+      String rowId,
+      String columnId,
+      CellDetails details}) {
     this
       ..uid = uid
       ..value = value
       ..field = field
       ..columnId = columnId
-      ..rowId = rowId;
+      ..rowId = rowId
+      ..details = details;
   }
 
   Cell.fromMap(Map map) {
@@ -43,4 +55,11 @@ class Cell extends MapBase {
   remove(key) => _entityMap.remove(key);
 
   clear() => _entityMap.clear();
+}
+
+class CellDetails {
+  Category category;
+  City city;
+
+  CellDetails({this.category, this.city});
 }

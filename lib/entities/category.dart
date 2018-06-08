@@ -12,11 +12,11 @@ class Category extends MapBase {
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
 
-  String get categoryName => this['categoryName'];
-  set categoryName(String value) => this['categoryName'] = value;
+  String get name => this['categoryName'];
+  set name(String value) => this['categoryName'] = value;
 
-  bool get categoryIsActive => this.entity['categoryIsActive'];
-  set categoryIsActive(bool value) => this['categoryIsActive'] = value;
+  bool get isActive => this.entity['categoryIsActive'];
+  set isActive(bool value) => this['categoryIsActive'] = value;
 
   List<ProductOfCategory> get hasProduct => this['has_product'];
   set hasProduct(List<ProductOfCategory> value) => this['has_product'] = value;

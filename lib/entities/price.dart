@@ -2,6 +2,7 @@ library price_entity;
 
 import 'dart:collection';
 import 'company.dart';
+import 'city.dart';
 
 class Price extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -23,8 +24,8 @@ class Price extends MapBase {
   set belongsToCompany(List<Company> value) =>
       this['belongs_to_company'] = value;
 
-  //TODO
-//  belongs_to_city
+  List<City> get belongsToCity => this['belongs_to_city'];
+  set belongsToCity(List<City> value) => this['belongs_to_city'] = value;
 
   Price.fromMap(Map map) {
     this._entityMap = map;
@@ -35,6 +36,15 @@ class Price extends MapBase {
     }
 
     this._entityMap["belongs_to_company"] = companies;
+
+    List<City> cities = new List<City>();
+    if (map["belongs_to_city"] != null) {
+      for (Map city in map["belongs_to_city"]) {
+        cities.add(new City.fromMap(city));
+      }
+    }
+
+    this._entityMap["belongs_to_city"] = cities;
   }
 
   operator [](Object key) => _entityMap[key];

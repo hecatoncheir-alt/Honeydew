@@ -64,6 +64,13 @@ void main() {
                   "uid": "1",
                   "priceValue": 1,
                   "priceIsActive": true,
+                  "belongs_to_city": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "cityName": "Test city",
+                      "cityIsActive": true,
+                    }
+                  ],
                   "belongs_to_company": <Map>[
                     <String, dynamic>{
                       "uid": "1",
@@ -77,6 +84,13 @@ void main() {
                   "uid": "2",
                   "priceValue": 2,
                   "priceIsActive": true,
+                  "belongs_to_city": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "cityName": "Test city",
+                      "cityIsActive": true,
+                    }
+                  ],
                   "belongs_to_company": <Map>[
                     <String, dynamic>{
                       "uid": "1",
@@ -135,6 +149,13 @@ void main() {
                   "uid": "5",
                   "priceValue": 5,
                   "priceIsActive": true,
+                  "belongs_to_city": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "cityName": "Test city",
+                      "cityIsActive": true,
+                    }
+                  ],
                   "belongs_to_company": <Map>[
                     <String, dynamic>{
                       "uid": "2",

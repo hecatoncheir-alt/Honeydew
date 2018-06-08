@@ -19,6 +19,7 @@ import 'package:honeydew/entities.dart'
         Column,
         Row,
         Cell,
+        CellDetails,
         ProductsForPageSearchResponse;
 
 @Component(
@@ -102,6 +103,7 @@ class SearchResultComponent {
       Cell cellOfProductName = new Cell(
           uid: product.uid,
           field: "productName",
+          details: new CellDetails(category: product.belongsToCategory.first),
           value: product.productName,
           rowId: product.uid);
 
@@ -116,6 +118,10 @@ class SearchResultComponent {
             columnId: price.belongsToCompany.first.uid,
             field: price.belongsToCompany.first.companyName,
             value: price.priceValue.toString());
+
+        if (price.belongsToCity != null && price.belongsToCity.isNotEmpty)
+          cell.details = new CellDetails(city: price.belongsToCity.first);
+
         cells[cell.field] = cell;
       }
 
