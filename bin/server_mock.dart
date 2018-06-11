@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:honeydew/entities.dart' show EventData;
 
 void main() {
-  int port = 81;
+  int port = 8181;
 
   HttpServer.bind(InternetAddress.loopbackIPv4, port).then((HttpServer server) {
     print("Server is running on "
@@ -16,17 +16,18 @@ void main() {
       socket
           .map((data) => new EventData.from(json.decode(data)))
           .listen((EventData eventData) {
-//        {
-//          Message:Need items by name,
-//              Data:{
-//        "SearchedName":"sum",
-//        "CurrentPage":1,
-//        "Tot
-//        alProductsForOnePage":1,
-//        "Language":"ru"
-//        },
-//        APIVersion:1.0   .0
-//        }
+        // Input message example
+        // Map allProducts = {
+        //   "Message": "Need items by name",
+        //   "Data": json.encode({
+        //     "SearchedName": "sum",
+        //     "CurrentPage": 1,
+        //     "TotalProductsForOnePage": 1,
+        //     "Language": "ru"
+        //   }),
+        //   "APIVersion": "1.0.0"
+        // };
+
         if (eventData.message == "Need items by name") {
           EventData event = new EventData("Items by name ready");
           List<Map> products = <Map>[
@@ -84,6 +85,7 @@ void main() {
                   "uid": "2",
                   "priceValue": 2,
                   "priceIsActive": true,
+                  "priceDateTime": "2018-02-10T08:34:35.6055814Z",
                   "belongs_to_city": <Map>[
                     <String, dynamic>{
                       "uid": "1",
