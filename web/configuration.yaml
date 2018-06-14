@@ -3,4 +3,4 @@ production:
   socket:
     protocol: "ws"
     ip: "localhost"
-    port: 81
+    port: 8181

@@ -5,7 +5,7 @@ import 'company.dart';
 import 'city.dart';
 
 class Price extends MapBase {
-  Map<String, dynamic> _entityMap = new Map<String, dynamic>();
+  Map<String, dynamic> entity = new Map<String, dynamic>();
 
   String get uid => this['uid'];
   set uid(String value) => this['uid'] = value;
@@ -13,9 +13,8 @@ class Price extends MapBase {
   int get priceValue => this['priceValue'];
   set priceValue(int value) => this['priceValue'] = value;
 
-  //TODO
-//  String get priceDateTime => this['priceDateTime'];
-//  set priceDateTime(String value) => this['priceDateTime'] = value;
+  DateTime get priceDateTime => this['priceDateTime'];
+  set priceDateTime(DateTime value) => this['priceDateTime'] = value;
 
   bool get priceIsActive => this['priceIsActive'];
   set priceIsActive(bool value) => this['priceIsActive'] = value;
@@ -28,14 +27,16 @@ class Price extends MapBase {
   set belongsToCity(List<City> value) => this['belongs_to_city'] = value;
 
   Price.fromMap(Map map) {
-    this._entityMap = map;
+    this.entity = map;
+
+    this.priceDateTime = DateTime.parse(map["priceDateTime"]);
 
     List<Company> companies = new List<Company>();
     for (Map company in map["belongs_to_company"]) {
       companies.add(new Company.fromMap(company));
     }
 
-    this._entityMap["belongs_to_company"] = companies;
+    this.entity["belongs_to_company"] = companies;
 
     List<City> cities = new List<City>();
     if (map["belongs_to_city"] != null) {
@@ -44,16 +45,16 @@ class Price extends MapBase {
       }
     }
 
-    this._entityMap["belongs_to_city"] = cities;
+    this.entity["belongs_to_city"] = cities;
   }
 
-  operator [](Object key) => _entityMap[key];
+  operator [](Object key) => entity[key];
 
-  operator []=(dynamic key, dynamic value) => _entityMap[key] = value;
+  operator []=(dynamic key, dynamic value) => entity[key] = value;
 
-  get keys => _entityMap.keys;
+  get keys => entity.keys;
 
-  remove(key) => _entityMap.remove(key);
+  remove(key) => entity.remove(key);
 
-  clear() => _entityMap.clear();
+  clear() => entity.clear();
 }

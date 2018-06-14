@@ -135,9 +135,38 @@ void main() {
               ],
               "has_price": <Map>[
                 <String, dynamic>{
+                  "uid": "19",
+                  "priceValue": 19,
+                  "priceIsActive": true,
+                  "priceDateTime": "2018-02-10T08:34:35.6055814Z",
+                  "belongs_to_city": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "cityName": "Test city",
+                      "cityIsActive": true,
+                    }
+                  ],
+                  "belongs_to_company": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "companyName": "Test company",
+                      "companyIri": "http://",
+                      "companyIsActive": true,
+                    }
+                  ]
+                },
+                <String, dynamic>{
                   "uid": "4",
                   "priceValue": 4,
                   "priceIsActive": true,
+                  "priceDateTime": "2018-01-10T08:34:35.6055814Z",
+                  "belongs_to_city": <Map>[
+                    <String, dynamic>{
+                      "uid": "1",
+                      "cityName": "Test city",
+                      "cityIsActive": true,
+                    }
+                  ],
                   "belongs_to_company": <Map>[
                     <String, dynamic>{
                       "uid": "1",

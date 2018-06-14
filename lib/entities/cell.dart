@@ -4,6 +4,7 @@ import 'dart:collection';
 
 import 'category.dart';
 import 'city.dart';
+import 'price.dart';
 
 class Cell extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -60,6 +61,7 @@ class Cell extends MapBase {
 class CellDetails {
   Category category;
   City city;
+  Price price;
 
-  CellDetails({this.category, this.city});
+  CellDetails({this.category, this.city, this.price});
 }
