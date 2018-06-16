@@ -28,8 +28,10 @@ class Price extends MapBase {
 
   Price.fromMap(Map map) {
     this.entity = map;
-
-    this.priceDateTime = DateTime.parse(map["priceDateTime"]);
+    String rfc3999Time = map["priceDateTime"];
+    rfc3999Time = rfc3999Time.replaceRange(
+        rfc3999Time.length - 2, rfc3999Time.length - 1, "");
+    this.priceDateTime = DateTime.parse(rfc3999Time);
 
     List<Company> companies = new List<Company>();
     for (Map company in map["belongs_to_company"]) {
