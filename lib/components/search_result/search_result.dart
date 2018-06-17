@@ -94,6 +94,27 @@ class SearchResultComponent {
     return companiesOfProductsPrices;
   }
 
+  Future<List<Price>> getLatestPricesOfCompaniesOfProduct(
+      Product product) async {
+    List<Price> latestPricesOfCompaniesOfProducts = new List<Price>();
+
+    for (Price price in product.hasPrice) {
+      latestPricesOfCompaniesOfProducts.add(price);
+
+      for (Price otherPrice in product.hasPrice) {
+        if (price.belongsToCompany.first.uid ==
+            otherPrice.belongsToCompany.first.uid) {
+          if (price.priceDateTime.isBefore(otherPrice.priceDateTime)) {
+            int index = latestPricesOfCompaniesOfProducts.indexOf(price);
+            latestPricesOfCompaniesOfProducts[index] = otherPrice;
+          }
+        }
+      }
+    }
+
+    return latestPricesOfCompaniesOfProducts;
+  }
+
   Future<List<Row>> prepareRows(List<Product> products) async {
     List<Row> rows = new List<Row>();
 
@@ -109,45 +130,23 @@ class SearchResultComponent {
 
       cells[cellOfProductName.field] = cellOfProductName;
 
-      ///TODO: Может быть несколько цен(по датам) для одной компании
-      ///Показывать все цены
-      ///
-      List<Price> latestPricesOfCompaniesOfProducts = new List<Price>();
+      List<Price> latestPricesOfCompaniesOfProducts =
+          await getLatestPricesOfCompaniesOfProduct(product);
 
-      for (Company companyOfProduct in product.belongsToCompany) {
-        for (Price price in product.hasPrice) {
-          for (Company companyOfPrice in price.belongsToCompany) {
-            if (companyOfPrice.uid != companyOfProduct.uid) continue;
-            if (!latestPricesOfCompaniesOfProducts.contains(price))
-              latestPricesOfCompaniesOfProducts.add(price);
+      for (Price price in latestPricesOfCompaniesOfProducts) {
+        Cell cell = new Cell(
+            uid: price.uid,
+            rowId: product.uid,
+            columnId: price.belongsToCompany.first.uid,
+            field: price.belongsToCompany.first.companyName,
+            value: price.priceValue.toString());
 
-            int index = latestPricesOfCompaniesOfProducts.indexOf(price);
-            Price alreadyExistPrice = latestPricesOfCompaniesOfProducts[index];
+        if (price.belongsToCity != null && price.belongsToCity.isNotEmpty)
+          cell.details =
+              new CellDetails(city: price.belongsToCity.first, price: price);
 
-            if (!alreadyExistPrice.priceDateTime.isBefore(price.priceDateTime))
-              continue;
-
-            latestPricesOfCompaniesOfProducts[index] = price;
-          }
-        }
+        cells[cell.field] = cell;
       }
-
-//      Запустить этот цикл из latestPricesOfCompaniesOfProducts
-
-      // for (Price price in product.hasPrice) {
-      //   Cell cell = new Cell(
-      //       uid: price.uid,
-      //       rowId: product.uid,
-      //       columnId: price.belongsToCompany.first.uid,
-      //       field: price.belongsToCompany.first.companyName,
-      //       value: price.priceValue.toString());
-
-      //   if (price.belongsToCity != null && price.belongsToCity.isNotEmpty)
-      //     cell.details =
-      //         new CellDetails(city: price.belongsToCity.first, price: price);
-
-      //   cells[cell.field] = cell;
-      // }
 
       Row row = new Row(uid: product.uid, cells: cells);
       rows.add(row);

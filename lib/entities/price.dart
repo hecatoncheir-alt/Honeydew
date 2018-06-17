@@ -28,6 +28,8 @@ class Price extends MapBase {
 
   Price.fromMap(Map map) {
     this.entity = map;
+
+    // Предпоследний символ в дате перед Z можно отрезать
     String rfc3999Time = map["priceDateTime"];
     rfc3999Time = rfc3999Time.replaceRange(
         rfc3999Time.length - 2, rfc3999Time.length - 1, "");

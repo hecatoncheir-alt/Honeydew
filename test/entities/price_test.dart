@@ -5,12 +5,10 @@ import 'package:honeydew/entities/price.dart';
 
 void main() {
   test("Price can decode datetime", () async {
-    // TODO: предпоследний символ в дате перед Z можно отрезать
+    // Предпоследний символ в дате перед Z можно отрезать
     String rfc3999Time = "2018-05-16T14:08:11.7295653Z";
     rfc3999Time = rfc3999Time.replaceRange(
         rfc3999Time.length - 2, rfc3999Time.length - 1, "");
-
-    DateTime time = DateTime.parse(rfc3999Time);
 
     Map mockPrice = <String, dynamic>{
       "uid": "2",

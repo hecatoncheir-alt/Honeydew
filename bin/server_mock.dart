@@ -65,6 +65,7 @@ void main() {
                   "uid": "1",
                   "priceValue": 1,
                   "priceIsActive": true,
+                  "priceDateTime": "2018-00-10T08:34:35.6055814Z",
                   "belongs_to_city": <Map>[
                     <String, dynamic>{
                       "uid": "1",
@@ -138,7 +139,7 @@ void main() {
                   "uid": "19",
                   "priceValue": 19,
                   "priceIsActive": true,
-                  "priceDateTime": "2018-02-10T08:34:35.6055814Z",
+                  "priceDateTime": "2018-05-10T08:34:35.6055814Z",
                   "belongs_to_city": <Map>[
                     <String, dynamic>{
                       "uid": "1",
@@ -159,7 +160,7 @@ void main() {
                   "uid": "4",
                   "priceValue": 4,
                   "priceIsActive": true,
-                  "priceDateTime": "2018-01-10T08:34:35.6055814Z",
+                  "priceDateTime": "2018-03-10T08:34:35.6055814Z",
                   "belongs_to_city": <Map>[
                     <String, dynamic>{
                       "uid": "1",
@@ -180,6 +181,7 @@ void main() {
                   "uid": "5",
                   "priceValue": 5,
                   "priceIsActive": true,
+                  "priceDateTime": "2018-01-10T08:34:35.6055814Z",
                   "belongs_to_city": <Map>[
                     <String, dynamic>{
                       "uid": "1",
