@@ -53,6 +53,7 @@
     align-items: center;
     justify-content: center;
 
+    cursor: pointer;
     grid-column-gap: 10px;
     grid-template-columns: 3fr repeat(3, 1fr);
 
@@ -63,6 +64,9 @@
     &:hover {
       background-color: #deecb4;
       border-bottom-color: #fff;
+      .row__cell .cell__details {
+        opacity: 1 !important;
+      }
     }
 
     .row__column {
@@ -78,6 +82,36 @@
         font-family: 'IBM Plex Sans';
         font-style: normal;
         font-weight: 400;
+
+        .cell__details {
+          bottom: 0;
+
+          padding: 5px;
+
+          font-size: 0.9em;
+
+          transition: all 300ms ease-out;
+
+          text-align: left;
+
+          display: flex;
+
+          border-radius: 6px;
+          flex-direction: column;
+          opacity: 0.3;
+          z-index: 9;
+
+          &.details__city {
+            padding: 3px;
+
+            border: 1px solid #55aa26;
+            background: #f5fbe5;
+          }
+
+          &.details__dateTime {
+            margin-top: 10px;
+          }
+        }
       }
     }
   }

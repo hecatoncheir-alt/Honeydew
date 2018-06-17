@@ -16,14 +16,13 @@
   }
 
   .page {
+    margin-right: 5px;
+    margin-left: 5px;
+
     justify-content: center;
 
-    flex-direction: row;
-
     cursor: pointer;
-
-    margin-left: 5px;
-    margin-right: 5px;
+    flex-direction: row;
 
     &:hover {
       color: #54b30f;

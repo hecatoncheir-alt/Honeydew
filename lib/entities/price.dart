@@ -13,6 +13,11 @@ class Price extends MapBase {
   int get priceValue => this['priceValue'];
   set priceValue(int value) => this['priceValue'] = value;
 
+  String get priceFormatDateTime {
+    DateTime dateTime = this['priceDateTime'];
+    return "${dateTime.day}.${dateTime.month}.${dateTime.year}";
+  }
+
   DateTime get priceDateTime => this['priceDateTime'];
   set priceDateTime(DateTime value) => this['priceDateTime'] = value;
 

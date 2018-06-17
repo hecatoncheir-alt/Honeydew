@@ -23,12 +23,17 @@
 
                   <div *ngIf="columns.first != column &&
                               row.cells[column.field].details != null">
-                    {{row.cells[column.field].details.city.name}}
-                    {{row.cells[column.field].details.price.priceDateTime}}
+                    <div class="cell__details">
+                      <div class="details__city">
+                        {{row.cells[column.field].details.city.name}}
+                      </div>
+                      <div class="details__dateTime">
+                        {{row.cells[column.field].details.price.priceFormatDateTime}}
+                      </div>
+                    </div>
                     <!-- <ng-container *ngFor="let price of row.cells[column.field].details.">
-
-                    </ng-container> -->
                     <!-- TODO: other prices -->
+                    <!-- </ng-container> -->
                   </div>
             </div>
         </div>

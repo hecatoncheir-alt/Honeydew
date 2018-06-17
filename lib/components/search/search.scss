@@ -2,8 +2,9 @@
 
 @keyframes fadeIn {
   0% {
-    opacity: 0;
     margin-top: -50px;
+
+    opacity: 0;
   }
 
   100% {
@@ -29,8 +30,8 @@
 
   &.anim {
     animation-duration: 700ms;
-    animation-name: fadeIn;
     animation-fill-mode: forwards;
+    animation-name: fadeIn;
   }
 
   .information__header {
@@ -51,11 +52,11 @@
   grid-area: search-form;
 
   &.anim {
-    opacity: 0;
-    animation-duration: 700ms;
-    animation-name: fadeIn;
     animation-delay: 100ms;
+    animation-duration: 700ms;
     animation-fill-mode: forwards;
+    animation-name: fadeIn;
+    opacity: 0;
   }
 
   .search-form__footer {
@@ -114,10 +115,10 @@
 }
 
 .counter {
+  transition: 160ms all ease-in-out;
+
   display: grid;
   align-items: center;
-
-  transition: 160ms all ease-in-out;
 
   grid-template-columns: 1fr auto;
 
@@ -158,11 +159,11 @@
   grid-area: search-result;
 
   &.anim {
-    opacity: 0;
-    animation-duration: 700ms;
-    animation-name: fadeIn;
     animation-delay: 200ms;
+    animation-duration: 700ms;
     animation-fill-mode: forwards;
+    animation-name: fadeIn;
+    opacity: 0;
   }
 
   .preloader {

@@ -1,29 +1,37 @@
 $cardWidth: 2em;
 $cardHeight: 2*$cardWidth;
-$cards: (#dbe13c, #b6d334, #A7C433, #6D911F, #47754A, #192539);
+$cards: (#dbe13c, #b6d334, #a7c433, #6d911f, #47754a, #192539);
 
 .deck {
-  position: relative;
-  height: $cardHeight;
-  width: $cardWidth + 2*$cardHeight;
   margin-top: -$cardHeight/2;
-  margin-left: -($cardWidth + 2*$cardHeight)/2
+  margin-left: -($cardWidth + 2*$cardHeight)/2;
+
+  width: $cardWidth + 2*$cardHeight;
+
+  height: $cardHeight;
+
+  position: relative;;
 }
 
 .card {
-  position: absolute;
   left: 50%;
+
   margin-left: - $cardWidth/2;
-  height: $cardHeight;
+
   width: $cardWidth;
+
+  height: $cardHeight;
+
   border-radius: $cardWidth/6;
+  position: absolute;
   transform-origin: center;
 
   @for $i from 1 through 6 {
     &:nth-child(#{$i}) {
       background: nth($cards, $i);
-      z-index: 10-$i;
+
       animation: shuffle+$i 1.9s ease-out infinite;
+      z-index: 10-$i;
     }
   }
 }
@@ -37,17 +45,17 @@ $cards: (#dbe13c, #b6d334, #A7C433, #6D911F, #47754A, #192539);
       transform: translateX(0) rotate(0deg);
     }
 
-  #{$slowdow1}% {
-    transform: translateX(($cardHeight + ($cardWidth/2))* ((7-$i)/6)) rotate(90deg);
+    #{$slowdow1}% {
+      transform: translateX(($cardHeight + ($cardWidth/2))* ((7-$i)/6)) rotate(90deg);
+    }
+    #{$slowdown2}% {
+      transform: translateX(-($cardHeight + ($cardWidth/2))* ((7-$i)/6)) rotate(270deg);
+    }
+    #{$slowdown3}% {
+      transform: translateX(0) rotate(360deg);
+    }
+    100% {
+      transform: translateX(0) rotate(360deg);
+    }
   }
-  #{$slowdown2}% {
-    transform: translateX(-($cardHeight + ($cardWidth/2))* ((7-$i)/6)) rotate(270deg);
-  }
-  #{$slowdown3}% {
-    transform: translateX(0) rotate(360deg);
-  }
-  100% {
-    transform: translateX(0) rotate(360deg);
-  }
-}
 }
