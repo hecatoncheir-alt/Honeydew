@@ -1,3 +1,23 @@
+.badge {
+  padding: 3px 6px;
+
+  border: 1px solid;
+
+  display: inline-block;
+
+  border-radius: 5px;
+}
+
+.badge--yellow {
+  background-color: #f1ee60;
+  border-color: #b8c540;
+}
+
+.badge--white {
+  background-color: #f8f8e5;
+  border-color: #e8f07f;
+}
+
 .table {
   min-width: 100%;
 }
@@ -100,17 +120,6 @@
           flex-direction: column;
           opacity: 0.3;
           z-index: 9;
-
-          &.details__city {
-            padding: 3px;
-
-            border: 1px solid #55aa26;
-            background: #f5fbe5;
-          }
-
-          &.details__dateTime {
-            margin-top: 10px;
-          }
         }
       }
     }
