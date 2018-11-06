@@ -36,13 +36,7 @@ class Price extends MapBase {
 
     // Предпоследний символ в дате перед Z можно отрезать
     String rfc3999Time = map["priceDateTime"];
-//    rfc3999Time = rfc3999Time.replaceRange(
-//        rfc3999Time.length - 2, rfc3999Time.length - 1, "");
-//    this.priceDateTime = DateTime.parse(rfc3999Time);
-
-    final timestamp = int.parse(rfc3999Time);
-    this.priceDateTime =
-        new DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: true);
+    this.priceDateTime = DateTime.parse(rfc3999Time);
 
     List<Company> companies = new List<Company>();
     for (Map company in map["belongs_to_company"]) {
