@@ -33,7 +33,7 @@ class SearchComponent implements OnActivate, OnInit, OnDestroy {
   ProductsForPageSearchParams productsForPageSearchParams;
   ProductsForPageSearchResponse productsForPageSearchResponse;
 
-  static int totalProductsForOnePageCount = 1;
+  static int totalProductsForOnePageCount = 10;
 
   @ViewChild('searchField')
   InputElement searchField;
