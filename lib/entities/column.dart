@@ -2,6 +2,8 @@ library column_entity;
 
 import 'dart:collection';
 
+import 'package:honeydew/entities.dart' show Company;
+
 class Column extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
 
@@ -14,11 +16,15 @@ class Column extends MapBase {
   String get field => this['field'];
   set field(String value) => this['field'] = value;
 
-  Column({String uid, String title, String field}) {
+  Company get company => this['company'];
+  set company(Company value) => this['company'] = value;
+
+  Column({String uid, String title, String field, Company company}) {
     this
       ..uid = uid
       ..title = title
-      ..field = field;
+      ..field = field
+      ..company = company;
   }
 
   Column.fromMap(Map map) {

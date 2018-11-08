@@ -67,6 +67,7 @@ class SearchResultComponent {
       for (Company company in companies) {
         Column companyColumn = new Column(
             uid: company.uid,
+            company: company,
             title: company.companyName,
             field: company.companyName);
         columns.add(companyColumn);
@@ -94,26 +95,26 @@ class SearchResultComponent {
     return companiesOfProductsPrices;
   }
 
-  Future<List<Price>> getLatestPricesOfCompaniesOfProduct(
-      Product product) async {
-    List<Price> latestPricesOfCompaniesOfProducts = new List<Price>();
-
-    for (Price price in product.hasPrice) {
-      latestPricesOfCompaniesOfProducts.add(price);
-
-      for (Price otherPrice in product.hasPrice) {
-        if (price.belongsToCompany.first.uid ==
-            otherPrice.belongsToCompany.first.uid) {
-          if (price.priceDateTime.isBefore(otherPrice.priceDateTime)) {
-            int index = latestPricesOfCompaniesOfProducts.indexOf(price);
-            latestPricesOfCompaniesOfProducts[index] = otherPrice;
-          }
-        }
-      }
-    }
-
-    return latestPricesOfCompaniesOfProducts;
-  }
+//  Future<List<Price>> getLatestPricesOfCompaniesOfProduct(
+//      Product product) async {
+//    List<Price> latestPricesOfCompaniesOfProducts = new List<Price>();
+//
+//    for (Price price in product.hasPrice) {
+//      latestPricesOfCompaniesOfProducts.add(price);
+//
+//      for (Price otherPrice in product.hasPrice) {
+//        if (price.belongsToCompany.first.uid ==
+//            otherPrice.belongsToCompany.first.uid) {
+//          if (price.priceDateTime.isBefore(otherPrice.priceDateTime)) {
+//            int index = latestPricesOfCompaniesOfProducts.indexOf(price);
+//            latestPricesOfCompaniesOfProducts[index] = otherPrice;
+//          }
+//        }
+//      }
+//    }
+//
+//    return latestPricesOfCompaniesOfProducts;
+//  }
 
   Future<List<Row>> prepareRows(List<Product> products) async {
     List<Row> rows = new List<Row>();
@@ -130,10 +131,10 @@ class SearchResultComponent {
 
       cells[cellOfProductName.field] = cellOfProductName;
 
-      List<Price> latestPricesOfCompaniesOfProducts =
-          await getLatestPricesOfCompaniesOfProduct(product);
+//      List<Price> latestPricesOfCompaniesOfProducts =
+//          await getLatestPricesOfCompaniesOfProduct(product);
 
-      for (Price price in latestPricesOfCompaniesOfProducts) {
+      for (Price price in product.hasPrice) {
         Cell cell = new Cell(
             uid: price.uid,
             rowId: product.uid,
@@ -148,7 +149,7 @@ class SearchResultComponent {
         cells[cell.field] = cell;
       }
 
-      Row row = new Row(uid: product.uid, cells: cells);
+      Row row = new Row(uid: product.uid, cells: cells, product: product);
       rows.add(row);
     }
 

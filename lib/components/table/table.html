@@ -31,7 +31,8 @@
                         {{row.cells[column.field].details.price.priceFormatDateTime}}
                       </div>
 
-                      {{row.cells[column.field].value}}
+                      <a href="{{column.company.companyIri}}/{{row.product.productIri}}"
+                         target="_blank">{{row.cells[column.field].value}}</a>
                     </div>
 
                     <div class="cell__details">

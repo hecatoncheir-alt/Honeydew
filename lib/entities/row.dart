@@ -2,6 +2,7 @@ library row_entity;
 
 import 'dart:collection';
 import 'cell.dart';
+import 'package:honeydew/entities.dart' show Product;
 
 class Row extends MapBase {
   Map<String, dynamic> _entityMap = new Map<String, dynamic>();
@@ -10,12 +11,16 @@ class Row extends MapBase {
   set uid(String value) => this['uid'] = value;
 
   Map<String, Cell> get cells => this['cells'];
-  set cells(Map<String,Cell> value) => this['cells'] = value;
+  set cells(Map<String, Cell> value) => this['cells'] = value;
 
-  Row({String uid,Map<String, Cell> cells}) {
+  Product get product => this['product'];
+  set product(Product value) => this['product'] = value;
+
+  Row({String uid, Map<String, Cell> cells, Product product}) {
     this
       ..uid = uid
-      ..cells = cells;
+      ..cells = cells
+      ..product = product;
   }
 
   Row.fromMap(Map map) {
