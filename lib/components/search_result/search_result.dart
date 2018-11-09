@@ -147,6 +147,7 @@ class SearchResultComponent {
               new CellDetails(city: price.belongsToCity.first, price: price);
 
         cells[cell.field] = cell;
+        break;
       }
 
       Row row = new Row(uid: product.uid, cells: cells, product: product);
