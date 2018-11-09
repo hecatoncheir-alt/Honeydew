@@ -134,21 +134,20 @@ class SearchResultComponent {
 //      List<Price> latestPricesOfCompaniesOfProducts =
 //          await getLatestPricesOfCompaniesOfProduct(product);
 
-      for (Price price in product.hasPrice) {
-        Cell cell = new Cell(
-            uid: price.uid,
-            rowId: product.uid,
-            columnId: price.belongsToCompany.first.uid,
-            field: price.belongsToCompany.first.companyName,
-            value: price.priceValue.toString());
+      Price price = product.hasPrice.first;
 
-        if (price.belongsToCity != null && price.belongsToCity.isNotEmpty)
-          cell.details =
-              new CellDetails(city: price.belongsToCity.first, price: price);
+      Cell cell = new Cell(
+          uid: price.uid,
+          rowId: product.uid,
+          columnId: price.belongsToCompany.first.uid,
+          field: price.belongsToCompany.first.companyName,
+          value: price.priceValue.toString());
 
-        cells[cell.field] = cell;
-        break;
-      }
+      if (price.belongsToCity != null && price.belongsToCity.isNotEmpty)
+        cell.details =
+            new CellDetails(city: price.belongsToCity.first, price: price);
+
+      cells[cell.field] = cell;
 
       Row row = new Row(uid: product.uid, cells: cells, product: product);
       rows.add(row);
