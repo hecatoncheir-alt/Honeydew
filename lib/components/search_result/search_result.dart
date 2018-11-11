@@ -122,6 +122,11 @@ class SearchResultComponent {
     for (Product product in products) {
       Map<String, Cell> cells = new Map<String, Cell>();
 
+      if (product.hasPrice.length == 0) {
+        print("Product ${product.productName} has no one price");
+        continue;
+      }
+
       Cell cellOfProductName = new Cell(
           uid: product.uid,
           field: "productName",
