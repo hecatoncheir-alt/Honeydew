@@ -17,6 +17,7 @@ import 'package:honeydew/entities.dart'
         Company,
         Price,
         Column,
+        ColumnDetails,
         Row,
         Cell,
         CellDetails,
@@ -67,9 +68,11 @@ class SearchResultComponent {
       for (Company company in companies) {
         Column companyColumn = new Column(
             uid: company.uid,
-            company: company,
             title: company.companyName,
             field: company.companyName);
+
+        companyColumn.details = new ColumnDetails(company: company);
+
         columns.add(companyColumn);
       }
 
@@ -95,27 +98,6 @@ class SearchResultComponent {
     return companiesOfProductsPrices;
   }
 
-//  Future<List<Price>> getLatestPricesOfCompaniesOfProduct(
-//      Product product) async {
-//    List<Price> latestPricesOfCompaniesOfProducts = new List<Price>();
-//
-//    for (Price price in product.hasPrice) {
-//      latestPricesOfCompaniesOfProducts.add(price);
-//
-//      for (Price otherPrice in product.hasPrice) {
-//        if (price.belongsToCompany.first.uid ==
-//            otherPrice.belongsToCompany.first.uid) {
-//          if (price.priceDateTime.isBefore(otherPrice.priceDateTime)) {
-//            int index = latestPricesOfCompaniesOfProducts.indexOf(price);
-//            latestPricesOfCompaniesOfProducts[index] = otherPrice;
-//          }
-//        }
-//      }
-//    }
-//
-//    return latestPricesOfCompaniesOfProducts;
-//  }
-
   Future<List<Row>> prepareRows(List<Product> products) async {
     List<Row> rows = new List<Row>();
 
@@ -136,9 +118,6 @@ class SearchResultComponent {
 
       cells[cellOfProductName.field] = cellOfProductName;
 
-//      List<Price> latestPricesOfCompaniesOfProducts =
-//          await getLatestPricesOfCompaniesOfProduct(product);
-
       Price price = product.hasPrice.first;
 
       Cell cell = new Cell(
@@ -154,7 +133,7 @@ class SearchResultComponent {
 
       cells[cell.field] = cell;
 
-      Row row = new Row(uid: product.uid, cells: cells, product: product);
+      Row row = new Row(uid: product.uid, cells: cells);
       rows.add(row);
     }
 

@@ -15,12 +15,6 @@ class Product extends MapBase {
   String get productName => this['productName'];
   set productName(String value) => this['productName'] = value;
 
-  String get productIri => this['productIri'];
-  set productIri(String value) => this['productIri'] = value;
-
-  String get previewImageLink => this['previewImageLink'];
-  set previewImageLink(String value) => this['previewImageLink'] = value;
-
   bool get productIsActive => this._entityMap['productIsActive'];
   set productIsActive(bool value) => this['productIsActive'] = value;
 
@@ -38,16 +32,12 @@ class Product extends MapBase {
   Product(
       {String uid,
       String productName,
-      String productIri,
-      String previewImageLink,
       List<Price> hasPrice,
       List<Company> belongsToCompany,
       List<Category> belongsToCategory,
       bool productIsActive}) {
     this["uid"] = uid;
     this["productName"] = productName;
-    this["productIri"] = productIri;
-    this["previewImageLink"] = previewImageLink;
     this["productIsActive"] = productIsActive;
     this
       ..belongsToCategory = belongsToCategory

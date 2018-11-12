@@ -16,15 +16,15 @@ class Column extends MapBase {
   String get field => this['field'];
   set field(String value) => this['field'] = value;
 
-  Company get company => this['company'];
-  set company(Company value) => this['company'] = value;
+  ColumnDetails get details => this['details'];
+  set details(ColumnDetails value) => this['details'] = value;
 
-  Column({String uid, String title, String field, Company company}) {
+  Column({String uid, String title, String field, ColumnDetails details}) {
     this
       ..uid = uid
       ..title = title
       ..field = field
-      ..company = company;
+      ..details = details;
   }
 
   Column.fromMap(Map map) {
@@ -40,4 +40,10 @@ class Column extends MapBase {
   remove(key) => _entityMap.remove(key);
 
   clear() => _entityMap.clear();
+}
+
+class ColumnDetails {
+  Company company;
+
+  ColumnDetails({this.company});
 }
