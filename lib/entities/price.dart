@@ -21,8 +21,8 @@ class Price extends MapBase {
   DateTime get priceDateTime => this['priceDateTime'];
   set priceDateTime(DateTime value) => this['priceDateTime'] = value;
 
-  DateTime get priceIri => this['priceIri'];
-  set priceIri(DateTime value) => this['priceIri'] = value;
+  String get priceIri => this['priceIri'];
+  set priceIri(String value) => this['priceIri'] = value;
 
   DateTime get previewImageLink => this['previewImageLink'];
   set previewImageLink(DateTime value) => this['previewImageLink'] = value;
